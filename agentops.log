@@ -1,0 +1,4 @@
+2025-09-09 15:55:02,338 - WARNING - Could not wrap google.adk.telemetry.trace_tool_response: module 'google.adk.telemetry' has no attribute 'trace_tool_response'
+2025-09-09 15:55:02,339 - INFO - Google ADK patching complete
+2025-09-09 15:55:02,339 - INFO - Google ADK instrumentation enabled
+2025-09-09 15:55:02,339 - INFO - Session Replay for default trace: https://app.agentops.ai/sessions?trace_id=9c879bdd0eb82c0fda6a6aa14e84e27d
