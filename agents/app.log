@@ -1,0 +1,86 @@
+Received request with query: price of aapl, session_id: session2, user_id: user1
+Received request with query: stock price of aapl, session_id: session1, user_id: user1
+Initialized state for user_id: user1, session_id: session1, app_name: stock_analysis_app, state: {'session_id': 'session1', 'user_id': 'user1', 'app_name': 'stock_analysis_app', 'seq': 0}
+Received request with query: price of aapl, session_id: session1, user_id: user1
+Calling agent with query: price of aapl, session_id: session1, user_id: user1, agent: root_agent
+Received response: content=Content(
+  parts=[
+    Part(
+      text='The current price of Apple (AAPL) stock is $245.50.'
+    ),
+  ],
+  role='model'
+) grounding_metadata=None partial=None turn_complete=None finish_reason=<FinishReason.STOP: 'STOP'> error_code=None error_message=None interrupted=None custom_metadata=None usage_metadata=GenerateContentResponseUsageMetadata(
+  candidates_token_count=18,
+  prompt_token_count=150,
+  prompt_tokens_details=[
+    ModalityTokenCount(
+      modality=<MediaModality.TEXT: 'TEXT'>,
+      token_count=150
+    ),
+  ],
+  total_token_count=168
+) live_session_resumption_update=None input_transcription=None output_transcription=None invocation_id='e-0a641d3d-4c72-493d-ba0e-f028ce5b0d52' author='root_agent' actions=EventActions(skip_summarization=None, state_delta={'seq': 7, 'result': 'The current price of Apple (AAPL) stock is $245.50.'}, artifact_delta={}, transfer_to_agent=None, escalate=None, requested_auth_configs={}) long_running_tool_ids=None branch=None id='82c67047-a428-492f-b7b5-29645e902407' timestamp=1758399559.675855
+-------------------- Session State --------------------
+{'session_id': 'session1', 'user_id': 'user1', 'app_name': 'stock_analysis_app', 'seq': 8, 'result': 'The current price of Apple (AAPL) stock is $245.50.'}
+-------------------------------------------------------
+Initialized state for user_id: user1, session_id: session1, app_name: stock_analysis_app, state: {'session_id': 'session1', 'user_id': 'user1', 'app_name': 'stock_analysis_app', 'seq': 0}
+Received request with query: what is the  price of aapl, session_id: session1, user_id: user1
+Calling agent with query: what is the  price of aapl, session_id: session1, user_id: user1, agent: root_agent
+Received response: content=Content(
+  parts=[
+    Part(
+      text='The current price of AAPL is $245.50.'
+    ),
+  ],
+  role='model'
+) grounding_metadata=None partial=None turn_complete=None finish_reason=<FinishReason.STOP: 'STOP'> error_code=None error_message=None interrupted=None custom_metadata=None usage_metadata=GenerateContentResponseUsageMetadata(
+  candidates_token_count=15,
+  prompt_token_count=1030,
+  prompt_tokens_details=[
+    ModalityTokenCount(
+      modality=<MediaModality.TEXT: 'TEXT'>,
+      token_count=1030
+    ),
+  ],
+  total_token_count=1045
+) live_session_resumption_update=None input_transcription=None output_transcription=None invocation_id='e-768caf72-2bda-4ee7-b897-3a9c97495e80' author='root_agent' actions=EventActions(skip_summarization=None, state_delta={'seq': 7, 'result': 'The current price of AAPL is $245.50.'}, artifact_delta={}, transfer_to_agent=None, escalate=None, requested_auth_configs={}) long_running_tool_ids=None branch=None id='8679f44b-8ee1-43b7-8644-74b87938eb51' timestamp=1758399868.501146
+-------------------- Session State --------------------
+{'session_id': 'session1', 'user_id': 'user1', 'app_name': 'stock_analysis_app', 'seq': 8, 'result': 'The current price of AAPL is $245.50.'}
+-------------------------------------------------------
+Initialized state for user_id: user1, session_id: session1, app_name: stock_analysis_app, state: {'session_id': 'session1', 'user_id': 'user1', 'app_name': 'stock_analysis_app', 'seq': 0}
+Received request with query: price of aapl, session_id: session1, user_id: user1
+Calling agent with query: price of aapl, session_id: session1, user_id: user1, agent: root_agent
+Received response: content=Content(
+  parts=[
+    Part(
+      text='The current price of AAPL is 245.5 USD.'
+    ),
+  ],
+  role='model'
+) grounding_metadata=None partial=None turn_complete=None finish_reason=<FinishReason.STOP: 'STOP'> error_code=None error_message=None interrupted=None custom_metadata=None usage_metadata=GenerateContentResponseUsageMetadata(
+  candidates_token_count=15,
+  prompt_token_count=147,
+  prompt_tokens_details=[
+    ModalityTokenCount(
+      modality=<MediaModality.TEXT: 'TEXT'>,
+      token_count=147
+    ),
+  ],
+  total_token_count=162
+) live_session_resumption_update=None input_transcription=None output_transcription=None invocation_id='e-4ffafa3b-00e7-4a3e-8287-1716c796b6e0' author='root_agent' actions=EventActions(skip_summarization=None, state_delta={'seq': 7, 'result': 'The current price of AAPL is 245.5 USD.'}, artifact_delta={}, transfer_to_agent=None, escalate=None, requested_auth_configs={}) long_running_tool_ids=None branch=None id='a861b6ab-6011-42d2-94b6-415de88f0ffb' timestamp=1758400072.576877
+-------------------- Session State --------------------
+{'session_id': 'session1', 'user_id': 'user1', 'app_name': 'stock_analysis_app', 'seq': 8, 'result': 'The current price of AAPL is 245.5 USD.'}
+-------------------------------------------------------
+Received request with query: STOCK PRICE OF AAPL, session_id: session1, user_id: user1
+Received request with query: what is the stock price of aapl, session_id: session_1758406328017, user_id: user1
+Received request with query: what is the  stock price of aapl, session_id: session_1758406385903, user_id: user1
+Received request with query: what is the stock price of aapl, session_id: session_1758406385903, user_id: user1
+Received request with query: whats the diff between high and low price, session_id: session_1758406385903, user_id: user1
+Received request with query: which stock are we discussing, session_id: session_1758406385903, user_id: user1
+Received request with query: what is the price of aapl, session_id: session_1758407800976, user_id: user1
+Received request with query: what is the difference between high and low, session_id: session_1758407800976, user_id: user1
+Received request with query: are we talking about IBM?, session_id: session_1758407800976, user_id: user1
+Received request with query: what is the price of aapl, session_id: session_1758408340073, user_id: user1
+Received request with query: what is the difference between high and low, session_id: session_1758408340073, user_id: user1
+Received request with query: are we talking about IBM?, session_id: session_1758408340073, user_id: user1

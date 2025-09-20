@@ -8,7 +8,7 @@ class SessionMemory:
         self.db = app_name
         
 
-    def save_session(self, session_id:str, user_id:str, seq:int, state:dict, source:str=""):
+    def save_session(self, session_id:str, user_id:str, seq:int, state:dict, source:str="", **kwargs):
         _id = SessionMemory.get_id(session_id, seq)
         data_state = {
             "_id": _id,
@@ -19,6 +19,7 @@ class SessionMemory:
             "source": source,
             "timestamp": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         }
+        data_state.update(kwargs)
 
         self.client.get_database(self.db).get_collection(user_id).insert_one(data_state)
 
@@ -37,9 +38,9 @@ class SessionMemory:
         return f"{session_id}_{seq}"
     
 
-def record_session(app_name:str, session_id:str, user_id:str, seq:int, state:dict, source:str=""):
+def record_session(app_name:str, session_id:str, user_id:str, seq:int, state:dict, source:str="", **kwargs):
     memory = SessionMemory(app_name)
-    memory.save_session(session_id, user_id, seq, state, source)
+    memory.save_session(session_id, user_id, seq, state, source, **kwargs)
 
 def purge_all_memory(app_name:str):
     memory = SessionMemory(app_name)

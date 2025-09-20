@@ -11,12 +11,13 @@ import memory
 from flask_cors import CORS
 
 #use debug to get detailed tracing.
-logging.basicConfig(level=logging.INFO,
-                    format='%(asctime)s - %(levelname)s - %(name)s - %(message)s', filemode='a', filename='app.log')
-
+log_fh = logging.FileHandler('app.log')
 logger = logging.getLogger(__name__)
+logger.addHandler(log_fh)
+logger.setLevel(logging.INFO)
 
-DB_URL = "sqlite:///./agent.db"
+
+#DB_URL = "sqlite:///./agent.db"
 HISTORY = "history"
 APP_NAME = "stock_analysis_app"
 session_service = InMemorySessionService() #DatabaseSessionService(db_url=DB_URL)

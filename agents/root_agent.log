@@ -1,0 +1,858 @@
+-- Before agent call hook executed.
+CallbackContext: ('e-ded1148b-74ba-4af0-9186-94b3a8f32487', {'session_id': 'session_1758407800976', 'user_id': 'user1', 'app_name': 'stock_analysis_app', 'seq': 0}, Content(
+  parts=[
+    Part(
+      text='what is the price of aapl'
+    ),
+  ],
+  role='user'
+))
+------ Before model call hook executed.
+CallbackContext: {'session_id': 'session_1758407800976', 'user_id': 'user1', 'app_name': 'stock_analysis_app', 'seq': 1}, 
+LLM_Request: model='gemini-2.5-flash' contents=[Content(
+  parts=[
+    Part(
+      text='what is the price of aapl'
+    ),
+  ],
+  role='user'
+)] config=GenerateContentConfig(
+  system_instruction=""" you are a stock analyst who can use other agents to suppliment the analysis by gathering information.
+History: 
+
+You are an agent. Your internal name is "root_agent".
+
+ The description about you is "Root agent to coordinate stock analysis"""",
+  tools=[
+    Tool(
+      function_declarations=[
+        FunctionDeclaration(
+          description='analyse provided ticker symbol',
+          name='info_gather_agent',
+          parameters=Schema(
+            properties={
+              <... Max depth ...>: <... Max depth ...>
+            },
+            required=[
+              <... Max depth ...>,
+            ],
+            type=<Type.OBJECT: 'OBJECT'>
+          )
+        ),
+      ]
+    ),
+  ]
+) live_connect_config=LiveConnectConfig() tools_dict={'info_gather_agent': <google.adk.tools.agent_tool.AgentTool object at 0x0000026818BC57F0>}
+------ After model call hook executed.
+CallbackContext: {'session_id': 'session_1758407800976', 'user_id': 'user1', 'app_name': 'stock_analysis_app', 'seq': 2}, 
+LLM_Response: content=Content(
+  parts=[
+    Part(
+      function_call=FunctionCall(
+        args={
+          'request': 'price of aapl'
+        },
+        name='info_gather_agent'
+      ),
+      thought_signature=b'\n\x98\x02\x01\xd1\xed\x8aol\xa3y\x18AH\xa1lHm1\x14\xbd-\xf1(#\xb3\x99\x80\xa7\xdd\xbfMo\xe7S~\xd1M\t\xf2+{\x0ey\x0by\xca\xd4=\xb2\xc5\xb7\t\xed\xdc6Ak\x9e\xc7`\\\xd3\x15\x12\xde\x8b\x8e\xca\x1f\xdc\x11\x8c\x01\xf5\xb9\x99\xa6i\xb1\xb0:\x91#\xbd\x7f\xd9ZgW\x92\xfc)\xd6\x88\xedi...'
+    ),
+  ],
+  role='model'
+) grounding_metadata=None partial=None turn_complete=None finish_reason=<FinishReason.STOP: 'STOP'> error_code=None error_message=None interrupted=None custom_metadata=None usage_metadata=GenerateContentResponseUsageMetadata(
+  candidates_token_count=20,
+  prompt_token_count=99,
+  prompt_tokens_details=[
+    ModalityTokenCount(
+      modality=<MediaModality.TEXT: 'TEXT'>,
+      token_count=99
+    ),
+  ],
+  thoughts_token_count=63,
+  total_token_count=182
+) live_session_resumption_update=None input_transcription=None output_transcription=None
+---- Before tool call hook executed.
+Tool: info_gather_agent, 
+Args: {'request': 'price of aapl'}, 
+ToolContext: <google.adk.sessions.state.State object at 0x0000026818CE3AD0>
+---- After tool call hook executed.
+Tool: info_gather_agent, 
+Args: {'request': 'price of aapl'}, 
+ToolContext: <google.adk.sessions.state.State object at 0x0000026818CE3AD0>, 
+Output: The current price of Apple Inc. (AAPL) is $245.50.
+------ Before model call hook executed.
+CallbackContext: {'session_id': 'session_1758407800976', 'user_id': 'user1', 'app_name': 'stock_analysis_app', 'seq': 5, 'result': 'The current price of Apple Inc. (AAPL) is $245.50.'}, 
+LLM_Request: model='gemini-2.5-flash' contents=[Content(
+  parts=[
+    Part(
+      text='what is the price of aapl'
+    ),
+  ],
+  role='user'
+), Content(
+  parts=[
+    Part(
+      function_call=FunctionCall(
+        args={
+          'request': 'price of aapl'
+        },
+        name='info_gather_agent'
+      ),
+      thought_signature=b'\n\x98\x02\x01\xd1\xed\x8aol\xa3y\x18AH\xa1lHm1\x14\xbd-\xf1(#\xb3\x99\x80\xa7\xdd\xbfMo\xe7S~\xd1M\t\xf2+{\x0ey\x0by\xca\xd4=\xb2\xc5\xb7\t\xed\xdc6Ak\x9e\xc7`\\\xd3\x15\x12\xde\x8b\x8e\xca\x1f\xdc\x11\x8c\x01\xf5\xb9\x99\xa6i\xb1\xb0:\x91#\xbd\x7f\xd9ZgW\x92\xfc)\xd6\x88\xedi...'
+    ),
+  ],
+  role='model'
+), Content(
+  parts=[
+    Part(
+      function_response=FunctionResponse(
+        name='info_gather_agent',
+        response={
+          'result': 'The current price of Apple Inc. (AAPL) is $245.50.'
+        }
+      )
+    ),
+  ],
+  role='user'
+)] config=GenerateContentConfig(
+  system_instruction=""" you are a stock analyst who can use other agents to suppliment the analysis by gathering information.
+History: 
+
+You are an agent. Your internal name is "root_agent".
+
+ The description about you is "Root agent to coordinate stock analysis"""",
+  tools=[
+    Tool(
+      function_declarations=[
+        FunctionDeclaration(
+          description='analyse provided ticker symbol',
+          name='info_gather_agent',
+          parameters=Schema(
+            properties={
+              <... Max depth ...>: <... Max depth ...>
+            },
+            required=[
+              <... Max depth ...>,
+            ],
+            type=<Type.OBJECT: 'OBJECT'>
+          )
+        ),
+      ]
+    ),
+  ]
+) live_connect_config=LiveConnectConfig() tools_dict={'info_gather_agent': <google.adk.tools.agent_tool.AgentTool object at 0x0000026818BC57F0>}
+------ After model call hook executed.
+CallbackContext: {'session_id': 'session_1758407800976', 'user_id': 'user1', 'app_name': 'stock_analysis_app', 'seq': 6, 'result': 'The current price of Apple Inc. (AAPL) is $245.50.'}, 
+LLM_Response: content=Content(
+  parts=[
+    Part(
+      text='The current price of Apple Inc. (AAPL) is $245.50.'
+    ),
+  ],
+  role='model'
+) grounding_metadata=None partial=None turn_complete=None finish_reason=<FinishReason.STOP: 'STOP'> error_code=None error_message=None interrupted=None custom_metadata=None usage_metadata=GenerateContentResponseUsageMetadata(
+  candidates_token_count=19,
+  prompt_token_count=154,
+  prompt_tokens_details=[
+    ModalityTokenCount(
+      modality=<MediaModality.TEXT: 'TEXT'>,
+      token_count=154
+    ),
+  ],
+  total_token_count=173
+) live_session_resumption_update=None input_transcription=None output_transcription=None
+-- After agent call hook executed.
+CallbackContext: ('e-ded1148b-74ba-4af0-9186-94b3a8f32487', {'session_id': 'session_1758407800976', 'user_id': 'user1', 'app_name': 'stock_analysis_app', 'seq': 7, 'result': 'The current price of Apple Inc. (AAPL) is $245.50.'}, Content(
+  parts=[
+    Part(
+      text='what is the price of aapl'
+    ),
+  ],
+  role='user'
+))
+-- Before agent call hook executed.
+CallbackContext: ('e-8b812c55-5f6c-41fb-8047-af46784570fc', {'history': '\nUser: what is the price of aapl\nAgent: The current price of Apple Inc. (AAPL) is $245.50.', 'session_id': 'session_1758407800976', 'user_id': 'user1', 'app_name': 'stock_analysis_app', 'seq': 8}, Content(
+  parts=[
+    Part(
+      text='what is the difference between high and low'
+    ),
+  ],
+  role='user'
+))
+------ Before model call hook executed.
+CallbackContext: {'history': '\nUser: what is the price of aapl\nAgent: The current price of Apple Inc. (AAPL) is $245.50.', 'session_id': 'session_1758407800976', 'user_id': 'user1', 'app_name': 'stock_analysis_app', 'seq': 9}, 
+LLM_Request: model='gemini-2.5-flash' contents=[Content(
+  parts=[
+    Part(
+      text='what is the difference between high and low'
+    ),
+  ],
+  role='user'
+)] config=GenerateContentConfig(
+  system_instruction=""" you are a stock analyst who can use other agents to suppliment the analysis by gathering information.
+History: 
+User: what is the price of aapl
+Agent: The current price of Apple Inc. (AAPL) is $245.50.
+
+You are an agent. Your internal name is "root_agent".
+
+ The description about you is "Root agent to coordinate stock analysis"""",
+  tools=[
+    Tool(
+      function_declarations=[
+        FunctionDeclaration(
+          description='analyse provided ticker symbol',
+          name='info_gather_agent',
+          parameters=Schema(
+            properties={
+              <... Max depth ...>: <... Max depth ...>
+            },
+            required=[
+              <... Max depth ...>,
+            ],
+            type=<Type.OBJECT: 'OBJECT'>
+          )
+        ),
+      ]
+    ),
+  ]
+) live_connect_config=LiveConnectConfig() tools_dict={'info_gather_agent': <google.adk.tools.agent_tool.AgentTool object at 0x0000026818BC57F0>}
+------ After model call hook executed.
+CallbackContext: {'history': '\nUser: what is the price of aapl\nAgent: The current price of Apple Inc. (AAPL) is $245.50.', 'session_id': 'session_1758407800976', 'user_id': 'user1', 'app_name': 'stock_analysis_app', 'seq': 10}, 
+LLM_Response: content=Content(
+  parts=[
+    Part(
+      function_call=FunctionCall(
+        args={
+          'request': 'the high and low for AAPL'
+        },
+        name='info_gather_agent'
+      ),
+      thought_signature=b'\n\xbd\x03\x01\xd1\xed\x8aor\xe9\xf6\xb3.\xa5\xe1Q\xc6\xe9\xa1\xf0#\xdf\xcb\xcc\x1b\xe7r\xa3\xcdGqG\xe9\xf4d\xf4\xdd\xd1m\xf2]\x00\x90\rXMI\xd3>\xd0(-\x8a\xef&\xe2\xab4I\x04\xe8\xfa/\xf5\xef{\x89\n\xce\xb1|p0\xc1:\xc8\xc2\x8c\x14\xa8\xf4Z\x93\xae\xb66\x13\\;\xd8\x91\xaa\x97@\xbb7\xfb...'
+    ),
+  ],
+  role='model'
+) grounding_metadata=None partial=None turn_complete=None finish_reason=<FinishReason.STOP: 'STOP'> error_code=None error_message=None interrupted=None custom_metadata=None usage_metadata=GenerateContentResponseUsageMetadata(
+  candidates_token_count=23,
+  prompt_token_count=132,
+  prompt_tokens_details=[
+    ModalityTokenCount(
+      modality=<MediaModality.TEXT: 'TEXT'>,
+      token_count=132
+    ),
+  ],
+  thoughts_token_count=94,
+  total_token_count=249
+) live_session_resumption_update=None input_transcription=None output_transcription=None
+---- Before tool call hook executed.
+Tool: info_gather_agent, 
+Args: {'request': 'the high and low for AAPL'}, 
+ToolContext: <google.adk.sessions.state.State object at 0x000002684AF7F770>
+---- After tool call hook executed.
+Tool: info_gather_agent, 
+Args: {'request': 'the high and low for AAPL'}, 
+ToolContext: <google.adk.sessions.state.State object at 0x000002684AF7F770>, 
+Output: Today, Apple Inc. (AAPL) reached a high of $246.27 and a low of $240.21. Its 52-week high is $260.10 and its 52-week low is $169.21.
+------ Before model call hook executed.
+CallbackContext: {'history': '\nUser: what is the price of aapl\nAgent: The current price of Apple Inc. (AAPL) is $245.50.', 'session_id': 'session_1758407800976', 'user_id': 'user1', 'app_name': 'stock_analysis_app', 'seq': 13, 'result': 'Today, Apple Inc. (AAPL) reached a high of $246.27 and a low of $240.21. Its 52-week high is $260.10 and its 52-week low is $169.21.'}, 
+LLM_Request: model='gemini-2.5-flash' contents=[Content(
+  parts=[
+    Part(
+      text='what is the difference between high and low'
+    ),
+  ],
+  role='user'
+), Content(
+  parts=[
+    Part(
+      function_call=FunctionCall(
+        args={
+          'request': 'the high and low for AAPL'
+        },
+        name='info_gather_agent'
+      ),
+      thought_signature=b'\n\xbd\x03\x01\xd1\xed\x8aor\xe9\xf6\xb3.\xa5\xe1Q\xc6\xe9\xa1\xf0#\xdf\xcb\xcc\x1b\xe7r\xa3\xcdGqG\xe9\xf4d\xf4\xdd\xd1m\xf2]\x00\x90\rXMI\xd3>\xd0(-\x8a\xef&\xe2\xab4I\x04\xe8\xfa/\xf5\xef{\x89\n\xce\xb1|p0\xc1:\xc8\xc2\x8c\x14\xa8\xf4Z\x93\xae\xb66\x13\\;\xd8\x91\xaa\x97@\xbb7\xfb...'
+    ),
+  ],
+  role='model'
+), Content(
+  parts=[
+    Part(
+      function_response=FunctionResponse(
+        name='info_gather_agent',
+        response={
+          'result': 'Today, Apple Inc. (AAPL) reached a high of $246.27 and a low of $240.21. Its 52-week high is $260.10 and its 52-week low is $169.21.'
+        }
+      )
+    ),
+  ],
+  role='user'
+)] config=GenerateContentConfig(
+  system_instruction=""" you are a stock analyst who can use other agents to suppliment the analysis by gathering information.
+History: 
+User: what is the price of aapl
+Agent: The current price of Apple Inc. (AAPL) is $245.50.
+
+You are an agent. Your internal name is "root_agent".
+
+ The description about you is "Root agent to coordinate stock analysis"""",
+  tools=[
+    Tool(
+      function_declarations=[
+        FunctionDeclaration(
+          description='analyse provided ticker symbol',
+          name='info_gather_agent',
+          parameters=Schema(
+            properties={
+              <... Max depth ...>: <... Max depth ...>
+            },
+            required=[
+              <... Max depth ...>,
+            ],
+            type=<Type.OBJECT: 'OBJECT'>
+          )
+        ),
+      ]
+    ),
+  ]
+) live_connect_config=LiveConnectConfig() tools_dict={'info_gather_agent': <google.adk.tools.agent_tool.AgentTool object at 0x0000026818BC57F0>}
+------ After model call hook executed.
+CallbackContext: {'history': '\nUser: what is the price of aapl\nAgent: The current price of Apple Inc. (AAPL) is $245.50.', 'session_id': 'session_1758407800976', 'user_id': 'user1', 'app_name': 'stock_analysis_app', 'seq': 14, 'result': 'Today, Apple Inc. (AAPL) reached a high of $246.27 and a low of $240.21. Its 52-week high is $260.10 and its 52-week low is $169.21.'}, 
+LLM_Response: content=Content(
+  parts=[
+    Part(
+      text='Today, the difference between the high and low for Apple Inc. (AAPL) was $6.06 ($246.27 - $240.21). The 52-week difference between its high and low is $90.89 ($260.10 - $169.21).',
+      thought_signature=b'\n\xd1\x03\x01\xd1\xed\x8ao\xe7\x9d\xb76\x8e\x131\x970,/\x97\xfe\x19\xb0\x99\xd3\x9f4\x8b\x9c\xbc\x9d\x9f\x1f\x91H\xe8\x8d\x13\x06\xebO[P2\x89\x9dW\x1b#i\r\xc9\xe5\xb5\x1cg\xb3\x06\xa6\xa3\xdfB\xe4\xd4\x89X\xbe}\x10\x91\xe0\xac\xfb$c1\x17\xa8\xa7\xd9\xca\xdd\x85V\xce\x8bG\xf0\x11G\xb2\xf1>\xd4\x86\xe3\xb0...'
+    ),
+  ],
+  role='model'
+) grounding_metadata=None partial=None turn_complete=None finish_reason=<FinishReason.STOP: 'STOP'> error_code=None error_message=None interrupted=None custom_metadata=None usage_metadata=GenerateContentResponseUsageMetadata(
+  candidates_token_count=73,
+  prompt_token_count=234,
+  prompt_tokens_details=[
+    ModalityTokenCount(
+      modality=<MediaModality.TEXT: 'TEXT'>,
+      token_count=234
+    ),
+  ],
+  thoughts_token_count=177,
+  total_token_count=484
+) live_session_resumption_update=None input_transcription=None output_transcription=None
+-- After agent call hook executed.
+CallbackContext: ('e-8b812c55-5f6c-41fb-8047-af46784570fc', {'history': '\nUser: what is the price of aapl\nAgent: The current price of Apple Inc. (AAPL) is $245.50.', 'session_id': 'session_1758407800976', 'user_id': 'user1', 'app_name': 'stock_analysis_app', 'seq': 15, 'result': 'Today, the difference between the high and low for Apple Inc. (AAPL) was $6.06 ($246.27 - $240.21). The 52-week difference between its high and low is $90.89 ($260.10 - $169.21).'}, Content(
+  parts=[
+    Part(
+      text='what is the difference between high and low'
+    ),
+  ],
+  role='user'
+))
+-- Before agent call hook executed.
+CallbackContext: ('e-49356c9c-636f-453f-9214-9317a30cc450', {'history': '\nUser: what is the price of aapl\nAgent: The current price of Apple Inc. (AAPL) is $245.50.\nUser: what is the difference between high and low\nAgent: Today, the difference between the high and low for Apple Inc. (AAPL) was $6.06 ($246.27 - $240.21). The 52-week difference between its high and low is $90.89 ($260.10 - $169.21).', 'session_id': 'session_1758407800976', 'user_id': 'user1', 'app_name': 'stock_analysis_app', 'seq': 16}, Content(
+  parts=[
+    Part(
+      text='are we talking about IBM?'
+    ),
+  ],
+  role='user'
+))
+------ Before model call hook executed.
+CallbackContext: {'history': '\nUser: what is the price of aapl\nAgent: The current price of Apple Inc. (AAPL) is $245.50.\nUser: what is the difference between high and low\nAgent: Today, the difference between the high and low for Apple Inc. (AAPL) was $6.06 ($246.27 - $240.21). The 52-week difference between its high and low is $90.89 ($260.10 - $169.21).', 'session_id': 'session_1758407800976', 'user_id': 'user1', 'app_name': 'stock_analysis_app', 'seq': 17}, 
+LLM_Request: model='gemini-2.5-flash' contents=[Content(
+  parts=[
+    Part(
+      text='are we talking about IBM?'
+    ),
+  ],
+  role='user'
+)] config=GenerateContentConfig(
+  system_instruction=""" you are a stock analyst who can use other agents to suppliment the analysis by gathering information.
+History: 
+User: what is the price of aapl
+Agent: The current price of Apple Inc. (AAPL) is $245.50.
+User: what is the difference between high and low
+Agent: Today, the difference between the high and low for Apple Inc. (AAPL) was $6.06 ($246.27 - $240.21). The 52-week difference between its high and low is $90.89 ($260.10 - $169.21).
+
+You are an agent. Your internal name is "root_agent".
+
+ The description about you is "Root agent to coordinate stock analysis"""",
+  tools=[
+    Tool(
+      function_declarations=[
+        FunctionDeclaration(
+          description='analyse provided ticker symbol',
+          name='info_gather_agent',
+          parameters=Schema(
+            properties={
+              <... Max depth ...>: <... Max depth ...>
+            },
+            required=[
+              <... Max depth ...>,
+            ],
+            type=<Type.OBJECT: 'OBJECT'>
+          )
+        ),
+      ]
+    ),
+  ]
+) live_connect_config=LiveConnectConfig() tools_dict={'info_gather_agent': <google.adk.tools.agent_tool.AgentTool object at 0x0000026818BC57F0>}
+------ After model call hook executed.
+CallbackContext: {'history': '\nUser: what is the price of aapl\nAgent: The current price of Apple Inc. (AAPL) is $245.50.\nUser: what is the difference between high and low\nAgent: Today, the difference between the high and low for Apple Inc. (AAPL) was $6.06 ($246.27 - $240.21). The 52-week difference between its high and low is $90.89 ($260.10 - $169.21).', 'session_id': 'session_1758407800976', 'user_id': 'user1', 'app_name': 'stock_analysis_app', 'seq': 18}, 
+LLM_Response: content=Content(
+  parts=[
+    Part(
+      text='No, we are talking about Apple Inc. (AAPL).',
+      thought_signature=b'\n\xfa\x01\x01\xd1\xed\x8ao\xe35\x99\xc9\xc3\x9d\xc4\xbbN\xd36P$a\xb5\xaa\xa4\xd0\x13\xdd\xf9\r\x18F\xa7\x8bj\xec\xb5\xf3,@\xbf4\x91\x9e\x99\x18\x1a\xa4\xf2\x8c1\xc7\x7f\x8dB\x1f~V3\xd1T\xd8U\xde\xad\\\xb6\xb8\xa2\xd4\x01\xe4\xa7\xa1\x8f\xf92V\xd1\\\xbb\xdc\xee\xda\xc6\x1c\x04\x9c8!\xd9y\x10\xa29E6...'
+    ),
+  ],
+  role='model'
+) grounding_metadata=None partial=None turn_complete=None finish_reason=<FinishReason.STOP: 'STOP'> error_code=None error_message=None interrupted=None custom_metadata=None usage_metadata=GenerateContentResponseUsageMetadata(
+  candidates_token_count=12,
+  prompt_token_count=217,
+  prompt_tokens_details=[
+    ModalityTokenCount(
+      modality=<MediaModality.TEXT: 'TEXT'>,
+      token_count=217
+    ),
+  ],
+  thoughts_token_count=44,
+  total_token_count=273
+) live_session_resumption_update=None input_transcription=None output_transcription=None
+-- After agent call hook executed.
+CallbackContext: ('e-49356c9c-636f-453f-9214-9317a30cc450', {'history': '\nUser: what is the price of aapl\nAgent: The current price of Apple Inc. (AAPL) is $245.50.\nUser: what is the difference between high and low\nAgent: Today, the difference between the high and low for Apple Inc. (AAPL) was $6.06 ($246.27 - $240.21). The 52-week difference between its high and low is $90.89 ($260.10 - $169.21).', 'session_id': 'session_1758407800976', 'user_id': 'user1', 'app_name': 'stock_analysis_app', 'seq': 19, 'result': 'No, we are talking about Apple Inc. (AAPL).'}, Content(
+  parts=[
+    Part(
+      text='are we talking about IBM?'
+    ),
+  ],
+  role='user'
+))
+-- Before agent call hook executed.
+CallbackContext: ('e-2203fc47-fbae-4b28-af9a-72a31d862df2', {'session_id': 'session_1758408340073', 'user_id': 'user1', 'app_name': 'stock_analysis_app', 'seq': 0}, Content(
+  parts=[
+    Part(
+      text='what is the price of aapl'
+    ),
+  ],
+  role='user'
+))
+------ Before model call hook executed.
+CallbackContext: {'session_id': 'session_1758408340073', 'user_id': 'user1', 'app_name': 'stock_analysis_app', 'seq': 1}, 
+LLM_Request: model='gemini-2.5-flash' contents=[Content(
+  parts=[
+    Part(
+      text='what is the price of aapl'
+    ),
+  ],
+  role='user'
+)] config=GenerateContentConfig(
+  system_instruction=""" you are a stock analyst who can use other agents to suppliment the analysis by gathering information.
+History: 
+
+You are an agent. Your internal name is "root_agent".
+
+ The description about you is "Root agent to coordinate stock analysis"""",
+  tools=[
+    Tool(
+      function_declarations=[
+        FunctionDeclaration(
+          description='analyse provided ticker symbol',
+          name='info_gather_agent',
+          parameters=Schema(
+            properties={
+              <... Max depth ...>: <... Max depth ...>
+            },
+            required=[
+              <... Max depth ...>,
+            ],
+            type=<Type.OBJECT: 'OBJECT'>
+          )
+        ),
+      ]
+    ),
+  ]
+) live_connect_config=LiveConnectConfig() tools_dict={'info_gather_agent': <google.adk.tools.agent_tool.AgentTool object at 0x000001D532426BA0>}
+------ After model call hook executed.
+CallbackContext: {'session_id': 'session_1758408340073', 'user_id': 'user1', 'app_name': 'stock_analysis_app', 'seq': 2}, 
+LLM_Response: content=Content(
+  parts=[
+    Part(
+      function_call=FunctionCall(
+        args={
+          'request': 'price of aapl'
+        },
+        name='info_gather_agent'
+      ),
+      thought_signature=b'\n\xc7\x02\x01\xd1\xed\x8ao\x92\xe3\xfe\xd7\xb7\xc7j\x81\x0f?\x10D\xc0-I\xa1\xd2\x8f3d\x81\xe7<BL\xba4\xed)wqi\x86\x80\xb4\xe7\x85\xe1\xf5\x94\xe7\xb1xJ\x7f\xc2\xde/\xa5GV68\xc1\x0fG\x98i\x7f\x0b\x1a\xff\xea&d\x8f5nyh\xe6\r\xf8b\xfe\xd6\x04\x83Sw\xa0\xe7\x93\x05\xe6\xa5\xd5\xc5\xca...'
+    ),
+  ],
+  role='model'
+) grounding_metadata=None partial=None turn_complete=None finish_reason=<FinishReason.STOP: 'STOP'> error_code=None error_message=None interrupted=None custom_metadata=None usage_metadata=GenerateContentResponseUsageMetadata(
+  candidates_token_count=20,
+  prompt_token_count=99,
+  prompt_tokens_details=[
+    ModalityTokenCount(
+      modality=<MediaModality.TEXT: 'TEXT'>,
+      token_count=99
+    ),
+  ],
+  thoughts_token_count=75,
+  total_token_count=194
+) live_session_resumption_update=None input_transcription=None output_transcription=None
+---- Before tool call hook executed.
+Tool: info_gather_agent, 
+Args: {'request': 'price of aapl'}, 
+ToolContext: <google.adk.sessions.state.State object at 0x000001D532547890>
+---- After tool call hook executed.
+Tool: info_gather_agent, 
+Args: {'request': 'price of aapl'}, 
+ToolContext: <google.adk.sessions.state.State object at 0x000001D532547890>, 
+Output: The current price of AAPL is 245.5 USD.
+------ Before model call hook executed.
+CallbackContext: {'session_id': 'session_1758408340073', 'user_id': 'user1', 'app_name': 'stock_analysis_app', 'seq': 13, 'result': 'The current price of AAPL is 245.5 USD.'}, 
+LLM_Request: model='gemini-2.5-flash' contents=[Content(
+  parts=[
+    Part(
+      text='what is the price of aapl'
+    ),
+  ],
+  role='user'
+), Content(
+  parts=[
+    Part(
+      function_call=FunctionCall(
+        args={
+          'request': 'price of aapl'
+        },
+        name='info_gather_agent'
+      ),
+      thought_signature=b'\n\xc7\x02\x01\xd1\xed\x8ao\x92\xe3\xfe\xd7\xb7\xc7j\x81\x0f?\x10D\xc0-I\xa1\xd2\x8f3d\x81\xe7<BL\xba4\xed)wqi\x86\x80\xb4\xe7\x85\xe1\xf5\x94\xe7\xb1xJ\x7f\xc2\xde/\xa5GV68\xc1\x0fG\x98i\x7f\x0b\x1a\xff\xea&d\x8f5nyh\xe6\r\xf8b\xfe\xd6\x04\x83Sw\xa0\xe7\x93\x05\xe6\xa5\xd5\xc5\xca...'
+    ),
+  ],
+  role='model'
+), Content(
+  parts=[
+    Part(
+      function_response=FunctionResponse(
+        name='info_gather_agent',
+        response={
+          'result': 'The current price of AAPL is 245.5 USD.'
+        }
+      )
+    ),
+  ],
+  role='user'
+)] config=GenerateContentConfig(
+  system_instruction=""" you are a stock analyst who can use other agents to suppliment the analysis by gathering information.
+History: 
+
+You are an agent. Your internal name is "root_agent".
+
+ The description about you is "Root agent to coordinate stock analysis"""",
+  tools=[
+    Tool(
+      function_declarations=[
+        FunctionDeclaration(
+          description='analyse provided ticker symbol',
+          name='info_gather_agent',
+          parameters=Schema(
+            properties={
+              <... Max depth ...>: <... Max depth ...>
+            },
+            required=[
+              <... Max depth ...>,
+            ],
+            type=<Type.OBJECT: 'OBJECT'>
+          )
+        ),
+      ]
+    ),
+  ]
+) live_connect_config=LiveConnectConfig() tools_dict={'info_gather_agent': <google.adk.tools.agent_tool.AgentTool object at 0x000001D532426BA0>}
+------ After model call hook executed.
+CallbackContext: {'session_id': 'session_1758408340073', 'user_id': 'user1', 'app_name': 'stock_analysis_app', 'seq': 14, 'result': 'The current price of AAPL is 245.5 USD.'}, 
+LLM_Response: content=Content(
+  parts=[
+    Part(
+      text='The current price of AAPL is 245.5 USD.'
+    ),
+  ],
+  role='model'
+) grounding_metadata=None partial=None turn_complete=None finish_reason=<FinishReason.STOP: 'STOP'> error_code=None error_message=None interrupted=None custom_metadata=None usage_metadata=GenerateContentResponseUsageMetadata(
+  candidates_token_count=15,
+  prompt_token_count=150,
+  prompt_tokens_details=[
+    ModalityTokenCount(
+      modality=<MediaModality.TEXT: 'TEXT'>,
+      token_count=150
+    ),
+  ],
+  total_token_count=165
+) live_session_resumption_update=None input_transcription=None output_transcription=None
+-- After agent call hook executed.
+CallbackContext: ('e-2203fc47-fbae-4b28-af9a-72a31d862df2', {'session_id': 'session_1758408340073', 'user_id': 'user1', 'app_name': 'stock_analysis_app', 'seq': 15, 'result': 'The current price of AAPL is 245.5 USD.'}, Content(
+  parts=[
+    Part(
+      text='what is the price of aapl'
+    ),
+  ],
+  role='user'
+))
+-- Before agent call hook executed.
+CallbackContext: ('e-6f6379a3-cf81-4bc4-937c-15494b55373e', {'history': '\nUser: what is the price of aapl\nAgent: The current price of AAPL is 245.5 USD.', 'session_id': 'session_1758408340073', 'user_id': 'user1', 'app_name': 'stock_analysis_app', 'seq': 16}, Content(
+  parts=[
+    Part(
+      text='what is the difference between high and low'
+    ),
+  ],
+  role='user'
+))
+------ Before model call hook executed.
+CallbackContext: {'history': '\nUser: what is the price of aapl\nAgent: The current price of AAPL is 245.5 USD.', 'session_id': 'session_1758408340073', 'user_id': 'user1', 'app_name': 'stock_analysis_app', 'seq': 17}, 
+LLM_Request: model='gemini-2.5-flash' contents=[Content(
+  parts=[
+    Part(
+      text='what is the difference between high and low'
+    ),
+  ],
+  role='user'
+)] config=GenerateContentConfig(
+  system_instruction=""" you are a stock analyst who can use other agents to suppliment the analysis by gathering information.
+History: 
+User: what is the price of aapl
+Agent: The current price of AAPL is 245.5 USD.
+
+You are an agent. Your internal name is "root_agent".
+
+ The description about you is "Root agent to coordinate stock analysis"""",
+  tools=[
+    Tool(
+      function_declarations=[
+        FunctionDeclaration(
+          description='analyse provided ticker symbol',
+          name='info_gather_agent',
+          parameters=Schema(
+            properties={
+              <... Max depth ...>: <... Max depth ...>
+            },
+            required=[
+              <... Max depth ...>,
+            ],
+            type=<Type.OBJECT: 'OBJECT'>
+          )
+        ),
+      ]
+    ),
+  ]
+) live_connect_config=LiveConnectConfig() tools_dict={'info_gather_agent': <google.adk.tools.agent_tool.AgentTool object at 0x000001D532426BA0>}
+------ After model call hook executed.
+CallbackContext: {'history': '\nUser: what is the price of aapl\nAgent: The current price of AAPL is 245.5 USD.', 'session_id': 'session_1758408340073', 'user_id': 'user1', 'app_name': 'stock_analysis_app', 'seq': 18}, 
+LLM_Response: content=Content(
+  parts=[
+    Part(
+      function_call=FunctionCall(
+        args={
+          'request': 'AAPL high and low'
+        },
+        name='info_gather_agent'
+      ),
+      thought_signature=b"\n\x92\x03\x01\xd1\xed\x8ao\x02\xe6\xa5\xb9\x88\x03\xe0\xb2\x82\xd8L'@\xd4\xbc\xa24-\x1aC\x15\x03qW\x84\xed\xfa%\xeb\x0f\xcc\x86\xd6\x0f\xee\xa6\xd2Ola%\xcc\x06\x87\x1a14\xdf\xed=r2\x81!\xb6\xca:\xf1\xaa\xed\xcf\x1dsX\xa0@e\xb2v\r\x86\xcfu\x7f[\x05\xe3Y\x02*kV\xd6I(S\xefv\xfa...'
+    ),
+  ],
+  role='model'
+) grounding_metadata=None partial=None turn_complete=None finish_reason=<FinishReason.STOP: 'STOP'> error_code=None error_message=None interrupted=None custom_metadata=None usage_metadata=GenerateContentResponseUsageMetadata(
+  candidates_token_count=20,
+  prompt_token_count=128,
+  prompt_tokens_details=[
+    ModalityTokenCount(
+      modality=<MediaModality.TEXT: 'TEXT'>,
+      token_count=128
+    ),
+  ],
+  thoughts_token_count=82,
+  total_token_count=230
+) live_session_resumption_update=None input_transcription=None output_transcription=None
+---- Before tool call hook executed.
+Tool: info_gather_agent, 
+Args: {'request': 'AAPL high and low'}, 
+ToolContext: <google.adk.sessions.state.State object at 0x000001D5637B6630>
+---- After tool call hook executed.
+Tool: info_gather_agent, 
+Args: {'request': 'AAPL high and low'}, 
+ToolContext: <google.adk.sessions.state.State object at 0x000001D5637B6630>, 
+Output: The daily high for AAPL was 246.27 USD and the daily low was 240.21 USD.
+The 52-week high for AAPL was 260.1 USD and the 52-week low was 169.21 USD.
+------ Before model call hook executed.
+CallbackContext: {'history': '\nUser: what is the price of aapl\nAgent: The current price of AAPL is 245.5 USD.', 'session_id': 'session_1758408340073', 'user_id': 'user1', 'app_name': 'stock_analysis_app', 'seq': 29, 'result': 'The daily high for AAPL was 246.27 USD and the daily low was 240.21 USD.\nThe 52-week high for AAPL was 260.1 USD and the 52-week low was 169.21 USD.'}, 
+LLM_Request: model='gemini-2.5-flash' contents=[Content(
+  parts=[
+    Part(
+      text='what is the difference between high and low'
+    ),
+  ],
+  role='user'
+), Content(
+  parts=[
+    Part(
+      function_call=FunctionCall(
+        args={
+          'request': 'AAPL high and low'
+        },
+        name='info_gather_agent'
+      ),
+      thought_signature=b"\n\x92\x03\x01\xd1\xed\x8ao\x02\xe6\xa5\xb9\x88\x03\xe0\xb2\x82\xd8L'@\xd4\xbc\xa24-\x1aC\x15\x03qW\x84\xed\xfa%\xeb\x0f\xcc\x86\xd6\x0f\xee\xa6\xd2Ola%\xcc\x06\x87\x1a14\xdf\xed=r2\x81!\xb6\xca:\xf1\xaa\xed\xcf\x1dsX\xa0@e\xb2v\r\x86\xcfu\x7f[\x05\xe3Y\x02*kV\xd6I(S\xefv\xfa...'
+    ),
+  ],
+  role='model'
+), Content(
+  parts=[
+    Part(
+      function_response=FunctionResponse(
+        name='info_gather_agent',
+        response={
+          'result': """The daily high for AAPL was 246.27 USD and the daily low was 240.21 USD.
+The 52-week high for AAPL was 260.1 USD and the 52-week low was 169.21 USD."""
+        }
+      )
+    ),
+  ],
+  role='user'
+)] config=GenerateContentConfig(
+  system_instruction=""" you are a stock analyst who can use other agents to suppliment the analysis by gathering information.
+History: 
+User: what is the price of aapl
+Agent: The current price of AAPL is 245.5 USD.
+
+You are an agent. Your internal name is "root_agent".
+
+ The description about you is "Root agent to coordinate stock analysis"""",
+  tools=[
+    Tool(
+      function_declarations=[
+        FunctionDeclaration(
+          description='analyse provided ticker symbol',
+          name='info_gather_agent',
+          parameters=Schema(
+            properties={
+              <... Max depth ...>: <... Max depth ...>
+            },
+            required=[
+              <... Max depth ...>,
+            ],
+            type=<Type.OBJECT: 'OBJECT'>
+          )
+        ),
+      ]
+    ),
+  ]
+) live_connect_config=LiveConnectConfig() tools_dict={'info_gather_agent': <google.adk.tools.agent_tool.AgentTool object at 0x000001D532426BA0>}
+------ After model call hook executed.
+CallbackContext: {'history': '\nUser: what is the price of aapl\nAgent: The current price of AAPL is 245.5 USD.', 'session_id': 'session_1758408340073', 'user_id': 'user1', 'app_name': 'stock_analysis_app', 'seq': 30, 'result': 'The daily high for AAPL was 246.27 USD and the daily low was 240.21 USD.\nThe 52-week high for AAPL was 260.1 USD and the 52-week low was 169.21 USD.'}, 
+LLM_Response: content=Content(
+  parts=[
+    Part(
+      text='The daily difference between high and low for AAPL was 6.06 USD. The 52-week difference between high and low for AAPL was 90.89 USD.',
+      thought_signature=b'\n\xf1\x02\x01\xd1\xed\x8aoWe\xb3Z\x8f\x13\xb9\xbb\xa5}\x86^\x9b\xd2\xf8\x8d\t\x0f\xf0\xdd\x14A\xfa\xe4`\x9aRQ\x8f|\xe6\xc2\x92\xa7\x0f^\xff\xd2\xe8\x9f1\xf4\x80\x81?\xa2~\x90\xf9\x07\xcd\x14\xba\x9f\xb75y9\x8d\x03\xf8\xef\x81\x1dd\xfd\xf0\\C\xff\x13&}\xf2\x94\xdf\x0e\xf6\xaaB\x84\x1f3j\xc9\xcdL\xa8*...'
+    ),
+  ],
+  role='model'
+) grounding_metadata=None partial=None turn_complete=None finish_reason=<FinishReason.STOP: 'STOP'> error_code=None error_message=None interrupted=None custom_metadata=None usage_metadata=GenerateContentResponseUsageMetadata(
+  candidates_token_count=41,
+  prompt_token_count=229,
+  prompt_tokens_details=[
+    ModalityTokenCount(
+      modality=<MediaModality.TEXT: 'TEXT'>,
+      token_count=229
+    ),
+  ],
+  thoughts_token_count=118,
+  total_token_count=388
+) live_session_resumption_update=None input_transcription=None output_transcription=None
+-- After agent call hook executed.
+CallbackContext: ('e-6f6379a3-cf81-4bc4-937c-15494b55373e', {'history': '\nUser: what is the price of aapl\nAgent: The current price of AAPL is 245.5 USD.', 'session_id': 'session_1758408340073', 'user_id': 'user1', 'app_name': 'stock_analysis_app', 'seq': 31, 'result': 'The daily difference between high and low for AAPL was 6.06 USD. The 52-week difference between high and low for AAPL was 90.89 USD.'}, Content(
+  parts=[
+    Part(
+      text='what is the difference between high and low'
+    ),
+  ],
+  role='user'
+))
+-- Before agent call hook executed.
+CallbackContext: ('e-99e23787-030e-40d6-8575-d545a7b2bb5c', {'history': '\nUser: what is the price of aapl\nAgent: The current price of AAPL is 245.5 USD.\nUser: what is the difference between high and low\nAgent: The daily difference between high and low for AAPL was 6.06 USD. The 52-week difference between high and low for AAPL was 90.89 USD.', 'session_id': 'session_1758408340073', 'user_id': 'user1', 'app_name': 'stock_analysis_app', 'seq': 32}, Content(
+  parts=[
+    Part(
+      text='are we talking about IBM?'
+    ),
+  ],
+  role='user'
+))
+------ Before model call hook executed.
+CallbackContext: {'history': '\nUser: what is the price of aapl\nAgent: The current price of AAPL is 245.5 USD.\nUser: what is the difference between high and low\nAgent: The daily difference between high and low for AAPL was 6.06 USD. The 52-week difference between high and low for AAPL was 90.89 USD.', 'session_id': 'session_1758408340073', 'user_id': 'user1', 'app_name': 'stock_analysis_app', 'seq': 33}, 
+LLM_Request: model='gemini-2.5-flash' contents=[Content(
+  parts=[
+    Part(
+      text='are we talking about IBM?'
+    ),
+  ],
+  role='user'
+)] config=GenerateContentConfig(
+  system_instruction=""" you are a stock analyst who can use other agents to suppliment the analysis by gathering information.
+History: 
+User: what is the price of aapl
+Agent: The current price of AAPL is 245.5 USD.
+User: what is the difference between high and low
+Agent: The daily difference between high and low for AAPL was 6.06 USD. The 52-week difference between high and low for AAPL was 90.89 USD.
+
+You are an agent. Your internal name is "root_agent".
+
+ The description about you is "Root agent to coordinate stock analysis"""",
+  tools=[
+    Tool(
+      function_declarations=[
+        FunctionDeclaration(
+          description='analyse provided ticker symbol',
+          name='info_gather_agent',
+          parameters=Schema(
+            properties={
+              <... Max depth ...>: <... Max depth ...>
+            },
+            required=[
+              <... Max depth ...>,
+            ],
+            type=<Type.OBJECT: 'OBJECT'>
+          )
+        ),
+      ]
+    ),
+  ]
+) live_connect_config=LiveConnectConfig() tools_dict={'info_gather_agent': <google.adk.tools.agent_tool.AgentTool object at 0x000001D532426BA0>}
+------ After model call hook executed.
+CallbackContext: {'history': '\nUser: what is the price of aapl\nAgent: The current price of AAPL is 245.5 USD.\nUser: what is the difference between high and low\nAgent: The daily difference between high and low for AAPL was 6.06 USD. The 52-week difference between high and low for AAPL was 90.89 USD.', 'session_id': 'session_1758408340073', 'user_id': 'user1', 'app_name': 'stock_analysis_app', 'seq': 34}, 
+LLM_Response: content=Content(
+  parts=[
+    Part(
+      text='No, we are talking about AAPL.',
+      thought_signature=b'\n\x91\x03\x01\xd1\xed\x8ao\xc8\xd2L\x1e\x07\x894} \xcb\xa3Mk)Cj\xebEFo\\\xe8\xed\x89\x8c\xb1\x11\x9b\x10f\x1c0\x00\x05p\xbf\xf7\x00\xaf\xe8V\x85\xab\xe8\xb9\xa5\xff\xeb\x8a\xd7\xbb\xb1\x15\xf1\x08\xd5F\xfe@a\xff\xef\xe37\xf7\xb9N\xcb\x12=v\xa6\x1b\xe3\xed\x80A\xe8?\xf9)|\xa9\xd6\xfds)\x00\x98...'
+    ),
+  ],
+  role='model'
+) grounding_metadata=None partial=None turn_complete=None finish_reason=<FinishReason.STOP: 'STOP'> error_code=None error_message=None interrupted=None custom_metadata=None usage_metadata=GenerateContentResponseUsageMetadata(
+  candidates_token_count=9,
+  prompt_token_count=181,
+  prompt_tokens_details=[
+    ModalityTokenCount(
+      modality=<MediaModality.TEXT: 'TEXT'>,
+      token_count=181
+    ),
+  ],
+  thoughts_token_count=75,
+  total_token_count=265
+) live_session_resumption_update=None input_transcription=None output_transcription=None
+-- After agent call hook executed.
+CallbackContext: ('e-99e23787-030e-40d6-8575-d545a7b2bb5c', {'history': '\nUser: what is the price of aapl\nAgent: The current price of AAPL is 245.5 USD.\nUser: what is the difference between high and low\nAgent: The daily difference between high and low for AAPL was 6.06 USD. The 52-week difference between high and low for AAPL was 90.89 USD.', 'session_id': 'session_1758408340073', 'user_id': 'user1', 'app_name': 'stock_analysis_app', 'seq': 35, 'result': 'No, we are talking about AAPL.'}, Content(
+  parts=[
+    Part(
+      text='are we talking about IBM?'
+    ),
+  ],
+  role='user'
+))

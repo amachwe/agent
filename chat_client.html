@@ -29,10 +29,18 @@
         </div>
         <div style="margin-top:12px;">
             <label>User ID: <input type="text" id="userId" value="user1" /></label>
-            <label>Session ID: <input type="text" id="sessionId" value="session1" /></label>
+            <label>Session ID: <input type="text" id="sessionId" /></label>
         </div>
     </div>
     <script>
+        // Set session ID to current timestamp by default
+        document.addEventListener('DOMContentLoaded', function() {
+            const sessionInput = document.getElementById('sessionId');
+            if (sessionInput && !sessionInput.value) {
+                sessionInput.value = 'session_' + Date.now();
+            }
+        });
+
         const messagesDiv = document.getElementById('messages');
         function appendMessage(text, sender) {
             const msg = document.createElement('div');
