@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agent Chat Client</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #f4f4f4; margin: 0; padding: 0; }
+        .chat-container { max-width: 500px; margin: 40px auto; background: #fff; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); padding: 24px; }
+    .messages { min-height: 200px; margin-bottom: 16px; display: flex; flex-direction: column; gap: 8px; }
+    .message { max-width: 75%; padding: 10px 16px; border-radius: 18px; margin: 2px 0; font-size: 1em; display: inline-block; }
+    .user { align-self: flex-end; background: #e6f0fa; color: #0078d7; border-bottom-right-radius: 4px; border-bottom-left-radius: 18px; }
+    .agent { align-self: flex-start; background: #f0f0f0; color: #333; border-bottom-left-radius: 4px; border-bottom-right-radius: 18px; }
+        .input-row { display: flex; gap: 8px; }
+        input, button { padding: 8px; font-size: 1em; }
+        input { flex: 1; }
+    </style>
+</head>
+<body>
+    <div class="chat-container">
+        <h2>Agent Chat</h2>
+        <div class="messages" id="messages"></div>
+        <div class="input-row">
+            <input type="text" id="userInput" placeholder="Type your message..." />
+            <button onclick="sendMessage()">Send</button>
+        </div>
+        <div style="margin-top:12px;">
+            <label>User ID: <input type="text" id="userId" value="user1" /></label>
+            <label>Session ID: <input type="text" id="sessionId" value="session1" /></label>
+        </div>
+    </div>
+    <script>
+        const messagesDiv = document.getElementById('messages');
+        function appendMessage(text, sender) {
+            const msg = document.createElement('div');
+            msg.className = 'message ' + sender;
+            msg.innerHTML = `<span>${text}</span>`;
+            messagesDiv.appendChild(msg);
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        }
+        async function sendMessage() {
+            const input = document.getElementById('userInput');
+            const userId = document.getElementById('userId').value;
+            const sessionId = document.getElementById('sessionId').value;
+            const text = input.value.trim();
+            if (!text) return;
+            appendMessage(text, 'user');
+            input.value = '';
+            try {
+                const response = await fetch('http://localhost:5000/agent_endpoint', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ query: text, user_id: userId, session_id: sessionId })
+                });
+                const data = await response.json();
+                setTimeout(() => appendMessage(data.result, 'agent'), 300); // slight delay for realism
+            } catch (e) {
+                appendMessage('Error contacting agent backend.', 'agent');
+            }
+        }
+        document.getElementById('userInput').addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') sendMessage();
+        });
+    </script>
+</body>
+</html>

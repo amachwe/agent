@@ -1,17 +1,27 @@
 from google.adk.agents import LlmAgent
+from google.adk.models import LlmRequest, LlmResponse
 import yfinance
 import pandas  as pd
 from google.adk.tools import AgentTool, BaseTool, ToolContext
+from google.adk.agents.callback_context import CallbackContext
 import logging 
 import google.genai.types as types
 from typing import Optional, Dict, Any
+
+
+NAME = "info_gather_agent"
 logging.basicConfig(level=logging.INFO,
-                    format='%(asctime)s - %(levelname)s - %(name)s - %(message)s')
+                    format='%(asctime)s - %(levelname)s - %(name)s - %(message)s', filemode='a', filename=f'{NAME}.log')
 
 MODEL = "gemini-2.5-flash"
 
 prompt = """you can gather information about stocks using yfinance api, 
-you can reflect upon the result and provide comprehensive details using data. Previous agent output: {result?}"""
+you can reflect upon the result and provide comprehensive details using data. Previous agent output: {history?}"""
+def  update_sequence(state:dict)-> int:
+    seq = state.get("seq", 0)
+    seq += 1
+    state["seq"] = seq
+    return seq
 
 def extract_stock_info(ticker: str) -> dict:
     """
@@ -31,17 +41,42 @@ def extract_stock_data(ticker: str, duration_days: int) -> pd.DataFrame:
     return stock.history(period=f"{duration_days}d")
 
 def callback_before_tool_call(tool: BaseTool, args: Dict[str, Any], tool_context: ToolContext)-> Optional[types.Content]:
-    logging.info("Before tool call hook executed. Tool Agent")
+    logging.info("-- Before tool call hook executed.")
     logging.info(f"Tool: {tool.name}, \nArgs: {args}, \nToolContext: {tool_context.state}")
 
+def callback_after_tool_call(tool: BaseTool, args: Dict[str, Any], tool_context: ToolContext, tool_response: Dict)-> Optional[types.Content]:
+    logging.info("-- After tool call hook executed.")
+    logging.info(f"Tool: {tool.name}, \nArgs: {args}, \nToolContext: {tool_context.state}, \nOutput: {tool_response}")
 
-info_gather_agent = LlmAgent(name = "info_gather_agent",
+def callback_before_agent_call(callback_context: CallbackContext)-> Optional[types.Content]:
+    logging.info("-- Before agent call hook executed.")
+    logging.info(f"CallbackContext: {callback_context.state.to_dict()}")
+
+def callback_after_agent_call(callback_context: CallbackContext)-> Optional[types.Content]:
+    logging.info("-- After agent call hook executed.")
+    logging.info(f"CallbackContext: {callback_context.state.to_dict()}")
+
+def callback_before_model_call(callback_context: CallbackContext, llm_request: LlmRequest)-> Optional[types.Content]:
+    logging.info("-- Before model call hook executed.")
+    logging.info(f"CallbackContext: {callback_context.state.to_dict()}, \nLLM_Request: {llm_request}")
+
+def callback_after_model_call(callback_context: CallbackContext, llm_response: LlmResponse)-> Optional[types.Content]:
+    logging.info("-- After model call hook executed.")
+    logging.info(f"CallbackContext: {callback_context.state.to_dict()}, \nLLM_Response: {llm_response}")
+
+
+info_gather_agent = LlmAgent(name = NAME,
                  model=MODEL, 
                  description=("analyse provided ticker symbol"),
                  instruction=prompt, 
                  tools=[extract_stock_info],
                  output_key="result",
-                 before_tool_callback=callback_before_tool_call)
+                 before_tool_callback=callback_before_tool_call,
+                 after_tool_callback=callback_after_tool_call,
+                 before_agent_callback=callback_before_agent_call,
+                 after_agent_callback=callback_after_agent_call,
+                 before_model_callback=callback_before_model_call,
+                 after_model_callback=callback_after_model_call)
 
 
 
