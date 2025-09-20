@@ -8,6 +8,7 @@ import flask
 import agent 
 import logging
 import memory
+from flask_cors import CORS
 
 #use debug to get detailed tracing.
 logging.basicConfig(level=logging.INFO,
@@ -67,6 +68,7 @@ async def main(app_name:str, session_id:str, user_id:str, query_json:str):
     await call_agent(runner, current_session, agent.root_agent, session_id, user_id, app_name, query_json)
 
 app = flask.Flask(APP_NAME)
+CORS(app)
 
 @app.route('/agent_endpoint', methods=['POST'])
 def agent_endpoint():
@@ -95,6 +97,8 @@ if __name__ == "__main__":
     #Purge all memory on restart for clean testing.
     memory.purge_all_memory(APP_NAME)
     print("Test Mode: Starting Agent Server... all memory purged.")
+    
+    
     app.run(debug=True)
 
     
