@@ -1,0 +1,60 @@
+POST /agent_endpoint HTTP/1.1
+Host: localhost:5000
+Content-Type: application/json
+
+{
+    "query": "What is the stock price of aapl?",
+    "session_id": "session_123",
+    "user_id": "user_456"
+}
+
+
+POST /agent_endpoint HTTP/1.1
+Host: localhost:5000
+Content-Type: application/json
+
+{
+    "query": "What is the delta between opening and closing price?",
+    "session_id": "session_123",
+    "user_id": "user_456"
+}
+
+POST /agent_endpoint HTTP/1.1
+Host: localhost:5000
+Content-Type: application/json
+
+{
+    "query": "What is the stock price of ibm?",
+    "session_id": "session_456",
+    "user_id": "user_456"
+}
+
+POST /agent_endpoint HTTP/1.1
+Host: localhost:5000
+Content-Type: application/json
+
+{
+    "query": "What is the difference between the opening and closing price?",
+    "session_id": "session_456",
+    "user_id": "user_456"
+}
+
+POST /agent_endpoint HTTP/1.1
+Host: localhost:5000
+Content-Type: application/json
+
+{
+    "query": "What stock symbol are we talking about?",
+    "session_id": "session_123",
+    "user_id": "user_456"
+}
+
+POST /agent_endpoint HTTP/1.1
+Host: localhost:5000
+Content-Type: application/json
+
+{
+    "query": "Did I remember the symbol correctly or did you remind me?",
+    "session_id": "session_123",
+    "user_id": "user_456"
+}

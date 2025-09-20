@@ -1,0 +1,659 @@
+-- Before agent call hook executed.
+CallbackContext: {'session_id': 'session_1758407800976', 'user_id': 'user1', 'app_name': 'stock_analysis_app', 'seq': 4}
+-- Before model call hook executed.
+CallbackContext: {'session_id': 'session_1758407800976', 'user_id': 'user1', 'app_name': 'stock_analysis_app', 'seq': 4}, 
+LLM_Request: model='gemini-2.5-flash' contents=[Content(
+  parts=[
+    Part(
+      text='price of aapl'
+    ),
+  ],
+  role='user'
+)] config=GenerateContentConfig(
+  system_instruction="""you can gather information about stocks using yfinance api, 
+you can reflect upon the result and provide comprehensive details using data. Previous agent output: 
+
+You are an agent. Your internal name is "info_gather_agent".
+
+ The description about you is "analyse provided ticker symbol"""",
+  tools=[
+    Tool(
+      function_declarations=[
+        FunctionDeclaration(
+          description="""
+Extract stock information for a given ticker symbol.
+ticker - string ticker symbol for the stock
+""",
+          name='extract_stock_info',
+          parameters=Schema(
+            properties={
+              <... Max depth ...>: <... Max depth ...>
+            },
+            required=[
+              <... Max depth ...>,
+            ],
+            type=<Type.OBJECT: 'OBJECT'>
+          )
+        ),
+      ]
+    ),
+  ]
+) live_connect_config=LiveConnectConfig() tools_dict={'extract_stock_info': <google.adk.tools.function_tool.FunctionTool object at 0x0000026849F5A120>}
+-- After model call hook executed.
+CallbackContext: {'session_id': 'session_1758407800976', 'user_id': 'user1', 'app_name': 'stock_analysis_app', 'seq': 4}, 
+LLM_Response: content=Content(
+  parts=[
+    Part(
+      function_call=FunctionCall(
+        args={
+          'ticker': 'aapl'
+        },
+        name='extract_stock_info'
+      ),
+      thought_signature=b'\n\xc9\x02\x01\xd1\xed\x8aox\x046o\x06\xf2\x91\xbdU\x0e\xb4\xd0\x8a\x15\xde\x08;2y\xcf,`K\x8e\xb0.\x90\xd4\xbe\xdf\x8c\xf9\xccf\xe0]o\xfd\xa9N\xf6\xc3.\x06\xdc\xb4|\xf5\xe6q\x1d\xc6t\xd9\x010l\x19\xea\x02R\xb0\x19h\x96\xdc\x8f\x97r\xe7\x8d\xa8\xa3F\x8e$u\xff{"u\\\xb5\x84y\x14\x8f\xd3l...'
+    ),
+  ],
+  role='model'
+) grounding_metadata=None partial=None turn_complete=None finish_reason=<FinishReason.STOP: 'STOP'> error_code=None error_message=None interrupted=None custom_metadata=None usage_metadata=GenerateContentResponseUsageMetadata(
+  candidates_token_count=18,
+  prompt_token_count=121,
+  prompt_tokens_details=[
+    ModalityTokenCount(
+      modality=<MediaModality.TEXT: 'TEXT'>,
+      token_count=121
+    ),
+  ],
+  thoughts_token_count=74,
+  total_token_count=213
+) live_session_resumption_update=None input_transcription=None output_transcription=None
+-- Before tool call hook executed.
+Tool: extract_stock_info, 
+Args: {'ticker': 'aapl'}, 
+ToolContext: <google.adk.sessions.state.State object at 0x0000026818BFF3E0>
+-- After tool call hook executed.
+Tool: extract_stock_info, 
+Args: {'ticker': 'aapl'}, 
+ToolContext: <google.adk.sessions.state.State object at 0x0000026818BFF3E0>, 
+Output: {'address1': 'One Apple Park Way', 'city': 'Cupertino', 'state': 'CA', 'zip': '95014', 'country': 'United States', 'phone': '(408) 996-1010', 'website': 'https://www.apple.com', 'industry': 'Consumer Electronics', 'industryKey': 'consumer-electronics', 'industryDisp': 'Consumer Electronics', 'sector': 'Technology', 'sectorKey': 'technology', 'sectorDisp': 'Technology', 'longBusinessSummary': 'Apple Inc. designs, manufactures, and markets smartphones, personal computers, tablets, wearables, and accessories worldwide. The company offers iPhone, a line of smartphones; Mac, a line of personal computers; iPad, a line of multi-purpose tablets; and wearables, home, and accessories comprising AirPods, Apple TV, Apple Watch, Beats products, and HomePod. It also provides AppleCare support and cloud services; and operates various platforms, including the App Store that allow customers to discover and download applications and digital content, such as books, music, video, games, and podcasts, as well as advertising services include third-party licensing arrangements and its own advertising platforms. In addition, the company offers various subscription-based services, such as Apple Arcade, a game subscription service; Apple Fitness+, a personalized fitness service; Apple Music, which offers users a curated listening experience with on-demand radio stations; Apple News+, a subscription news and magazine service; Apple TV+, which offers exclusive original content; Apple Card, a co-branded credit card; and Apple Pay, a cashless payment service, as well as licenses its intellectual property. The company serves consumers, and small and mid-sized businesses; and the education, enterprise, and government markets. It distributes third-party applications for its products through the App Store. The company also sells its products through its retail and online stores, and direct sales force; and third-party cellular network carriers, wholesalers, retailers, and resellers. Apple Inc. was founded in 1976 and is headquartered in Cupertino, California.', 'fullTimeEmployees': 150000, 'companyOfficers': [{'maxAge': 1, 'name': 'Mr. Timothy D. Cook', 'age': 63, 'title': 'CEO & Director', 'yearBorn': 1961, 'fiscalYear': 2024, 'totalPay': 16520856, 'exercisedValue': 0, 'unexercisedValue': 0}, {'maxAge': 1, 'name': 'Ms. Katherine L. Adams', 'age': 60, 'title': 'Senior VP, General Counsel & Secretary', 'yearBorn': 1964, 'fiscalYear': 2024, 'totalPay': 5022182, 'exercisedValue': 0, 'unexercisedValue': 0}, {'maxAge': 1, 'name': "Ms. Deirdre  O'Brien", 'age': 57, 'title': 'Chief People Officer & Senior VP of Retail', 'yearBorn': 1967, 'fiscalYear': 2024, 'totalPay': 5022182, 'exercisedValue': 0, 'unexercisedValue': 0}, {'maxAge': 1, 'name': 'Mr. Jeffrey E. Williams', 'age': 60, 'title': 'Senior Vice President of Design, Watch, & Health', 'yearBorn': 1964, 'fiscalYear': 2024, 'totalPay': 5020737, 'exercisedValue': 0, 'unexercisedValue': 0}, {'maxAge': 1, 'name': 'Mr. Kevan  Parekh', 'age': 52, 'title': 'Senior VP & CFO', 'yearBorn': 1972, 'fiscalYear': 2024, 'exercisedValue': 0, 'unexercisedValue': 0}, {'maxAge': 1, 'name': 'Mr. Sabih  Khan', 'title': 'Chief Operating Officer', 'fiscalYear': 2024, 'exercisedValue': 0, 'unexercisedValue': 0}, {'maxAge': 1, 'name': 'Mr. Chris  Kondo', 'title': 'Senior Director of Corporate Accounting', 'fiscalYear': 2024, 'exercisedValue': 0, 'unexercisedValue': 0}, {'maxAge': 1, 'name': 'Suhasini  Chandramouli', 'title': 'Director of Investor Relations', 'fiscalYear': 2024, 'exercisedValue': 0, 'unexercisedValue': 0}, {'maxAge': 1, 'name': 'Ms. Kristin Huguet Quayle', 'title': 'Vice President of Worldwide Communications', 'fiscalYear': 2024, 'exercisedValue': 0, 'unexercisedValue': 0}, {'maxAge': 1, 'name': 'Mr. Greg  Joswiak', 'title': 'Senior Vice President of Worldwide Marketing', 'fiscalYear': 2024, 'exercisedValue': 0, 'unexercisedValue': 0}], 'auditRisk': 7, 'boardRisk': 1, 'compensationRisk': 3, 'shareHolderRightsRisk': 1, 'overallRisk': 1, 'governanceEpochDate': 1756684800, 'compensationAsOfEpochDate': 1735603200, 'irWebsite': 'http://investor.apple.com/', 'executiveTeam': [], 'maxAge': 86400, 'priceHint': 2, 'previousClose': 237.88, 'open': 241.175, 'dayLow': 240.2106, 'dayHigh': 246.27, 'regularMarketPreviousClose': 237.88, 'regularMarketOpen': 241.175, 'regularMarketDayLow': 240.2106, 'regularMarketDayHigh': 246.3, 'dividendRate': 1.04, 'dividendYield': 0.42, 'exDividendDate': 1754870400, 'payoutRatio': 0.1533, 'fiveYearAvgDividendYield': 0.54, 'beta': 1.109, 'trailingPE': 37.31003, 'forwardPE': 29.542719, 'volume': 162456387, 'regularMarketVolume': 162456387, 'averageVolume': 56212347, 'averageVolume10days': 66513550, 'averageDailyVolume10Day': 66513550, 'bid': 240.0, 'ask': 258.21, 'bidSize': 1, 'askSize': 1, 'marketCap': 3643315585024, 'fiftyTwoWeekLow': 169.21, 'fiftyTwoWeekHigh': 260.1, 'priceToSalesTrailing12Months': 8.916038, 'fiftyDayAverage': 223.929, 'twoHundredDayAverage': 221.6535, 'trailingAnnualDividendRate': 1.01, 'trailingAnnualDividendYield': 0.004245838, 'currency': 'USD', 'tradeable': False, 'enterpriseValue': 3689641672704, 'profitMargins': 0.24295999, 'floatShares': 14814419318, 'sharesOutstanding': 14840390000, 'sharesShort': 113582365, 'sharesShortPriorMonth': 104634941, 'sharesShortPreviousMonthDate': 1753920000, 'dateShortInterest': 1756425600, 'sharesPercentSharesOut': 0.0077, 'heldPercentInsiders': 0.0197, 'heldPercentInstitutions': 0.63643, 'shortRatio': 1.95, 'shortPercentOfFloat': 0.0077, 'impliedSharesOutstanding': 15318899712, 'bookValue': 4.431, 'priceToBook': 55.405098, 'lastFiscalYearEnd': 1727481600, 'nextFiscalYearEnd': 1759017600, 'mostRecentQuarter': 1751068800, 'earningsQuarterlyGrowth': 0.093, 'netIncomeToCommon': 99280003072, 'trailingEps': 6.58, 'forwardEps': 8.31, 'lastSplitFactor': '4:1', 'lastSplitDate': 1598832000, 'enterpriseToRevenue': 9.029, 'enterpriseToEbitda': 26.039, '52WeekChange': 0.08402884, 'SandP52WeekChange': 0.1653893, 'lastDividendValue': 0.26, 'lastDividendDate': 1754870400, 'quoteType': 'EQUITY', 'currentPrice': 245.5, 'targetHighPrice': 300.0, 'targetLowPrice': 175.0, 'targetMeanPrice': 241.31557, 'targetMedianPrice': 243.0, 'recommendationMean': 2.02128, 'recommendationKey': 'buy', 'numberOfAnalystOpinions': 40, 'totalCash': 55372001280, 'totalCashPerShare': 3.731, 'ebitda': 141696008192, 'totalDebt': 101698002944, 'quickRatio': 0.724, 'currentRatio': 0.868, 'totalRevenue': 408624988160, 'debtToEquity': 154.486, 'revenuePerShare': 27.173, 'returnOnAssets': 0.24545999, 'returnOnEquity': 1.49814, 'grossProfits': 190739005440, 'freeCashflow': 94873747456, 'operatingCashflow': 108564996096, 'earningsGrowth': 0.121, 'revenueGrowth': 0.096, 'grossMargins': 0.46678, 'ebitdaMargins': 0.34675997, 'operatingMargins': 0.29990998, 'financialCurrency': 'USD', 'symbol': 'AAPL', 'language': 'en-US', 'region': 'US', 'typeDisp': 'Equity', 'quoteSourceName': 'Delayed Quote', 'triggerable': True, 'customPriceAlertConfidence': 'HIGH', 'marketState': 'CLOSED', 'corporateActions': [], 'postMarketTime': 1758326399, 'regularMarketTime': 1758312002, 'exchange': 'NMS', 'messageBoardId': 'finmb_24937', 'exchangeTimezoneName': 'America/New_York', 'exchangeTimezoneShortName': 'EDT', 'gmtOffSetMilliseconds': -14400000, 'market': 'us_market', 'esgPopulated': False, 'regularMarketChangePercent': 3.20329, 'regularMarketPrice': 245.5, 'fiftyTwoWeekLowChangePercent': 0.4508598, 'fiftyTwoWeekRange': '169.21 - 260.1', 'fiftyTwoWeekHighChange': -14.600006, 'fiftyTwoWeekHighChangePercent': -0.05613228, 'fiftyTwoWeekChangePercent': 8.402884, 'dividendDate': 1755129600, 'earningsTimestamp': 1753992000, 'earningsTimestampStart': 1761854400, 'earningsTimestampEnd': 1761854400, 'earningsCallTimestampStart': 1753995600, 'earningsCallTimestampEnd': 1753995600, 'isEarningsDateEstimate': True, 'epsTrailingTwelveMonths': 6.58, 'epsForward': 8.31, 'epsCurrentYear': 7.38448, 'priceEpsCurrentYear': 33.2454, 'fiftyDayAverageChange': 21.571, 'fiftyDayAverageChangePercent': 0.09632964, 'twoHundredDayAverageChange': 23.846497, 'twoHundredDayAverageChangePercent': 0.107584566, 'sourceInterval': 15, 'exchangeDataDelayedBy': 0, 'averageAnalystRating': '2.0 - Buy', 'cryptoTradeable': False, 'shortName': 'Apple Inc.', 'longName': 'Apple Inc.', 'hasPrePostMarketData': True, 'firstTradeDateMilliseconds': 345479400000, 'postMarketChangePercent': 0.07739407, 'postMarketPrice': 245.69, 'postMarketChange': 0.19000244, 'regularMarketChange': 7.62, 'regularMarketDayRange': '240.2106 - 246.3', 'fullExchangeName': 'NasdaqGS', 'averageDailyVolume3Month': 56212347, 'fiftyTwoWeekLowChange': 76.28999, 'displayName': 'Apple', 'trailingPegRatio': 2.3591}
+-- Before model call hook executed.
+CallbackContext: {'session_id': 'session_1758407800976', 'user_id': 'user1', 'app_name': 'stock_analysis_app', 'seq': 4}, 
+LLM_Request: model='gemini-2.5-flash' contents=[Content(
+  parts=[
+    Part(
+      text='price of aapl'
+    ),
+  ],
+  role='user'
+), Content(
+  parts=[
+    Part(
+      function_call=FunctionCall(
+        args={
+          'ticker': 'aapl'
+        },
+        name='extract_stock_info'
+      ),
+      thought_signature=b'\n\xc9\x02\x01\xd1\xed\x8aox\x046o\x06\xf2\x91\xbdU\x0e\xb4\xd0\x8a\x15\xde\x08;2y\xcf,`K\x8e\xb0.\x90\xd4\xbe\xdf\x8c\xf9\xccf\xe0]o\xfd\xa9N\xf6\xc3.\x06\xdc\xb4|\xf5\xe6q\x1d\xc6t\xd9\x010l\x19\xea\x02R\xb0\x19h\x96\xdc\x8f\x97r\xe7\x8d\xa8\xa3F\x8e$u\xff{"u\\\xb5\x84y\x14\x8f\xd3l...'
+    ),
+  ],
+  role='model'
+), Content(
+  parts=[
+    Part(
+      function_response=FunctionResponse(
+        name='extract_stock_info',
+        response=<dict len=180>
+      )
+    ),
+  ],
+  role='user'
+)] config=GenerateContentConfig(
+  system_instruction="""you can gather information about stocks using yfinance api, 
+you can reflect upon the result and provide comprehensive details using data. Previous agent output: 
+
+You are an agent. Your internal name is "info_gather_agent".
+
+ The description about you is "analyse provided ticker symbol"""",
+  tools=[
+    Tool(
+      function_declarations=[
+        FunctionDeclaration(
+          description="""
+Extract stock information for a given ticker symbol.
+ticker - string ticker symbol for the stock
+""",
+          name='extract_stock_info',
+          parameters=Schema(
+            properties={
+              <... Max depth ...>: <... Max depth ...>
+            },
+            required=[
+              <... Max depth ...>,
+            ],
+            type=<Type.OBJECT: 'OBJECT'>
+          )
+        ),
+      ]
+    ),
+  ]
+) live_connect_config=LiveConnectConfig() tools_dict={'extract_stock_info': <google.adk.tools.function_tool.FunctionTool object at 0x0000026818CB5F90>}
+-- After model call hook executed.
+CallbackContext: {'session_id': 'session_1758407800976', 'user_id': 'user1', 'app_name': 'stock_analysis_app', 'seq': 4}, 
+LLM_Response: content=Content(
+  parts=[
+    Part(
+      text='The current price of Apple Inc. (AAPL) is $245.50.'
+    ),
+  ],
+  role='model'
+) grounding_metadata=None partial=None turn_complete=None finish_reason=<FinishReason.STOP: 'STOP'> error_code=None error_message=None interrupted=None custom_metadata=None usage_metadata=GenerateContentResponseUsageMetadata(
+  candidates_token_count=19,
+  prompt_token_count=3502,
+  prompt_tokens_details=[
+    ModalityTokenCount(
+      modality=<MediaModality.TEXT: 'TEXT'>,
+      token_count=3502
+    ),
+  ],
+  total_token_count=3521
+) live_session_resumption_update=None input_transcription=None output_transcription=None
+-- After agent call hook executed.
+CallbackContext: {'session_id': 'session_1758407800976', 'user_id': 'user1', 'app_name': 'stock_analysis_app', 'seq': 4, 'result': 'The current price of Apple Inc. (AAPL) is $245.50.'}
+-- Before agent call hook executed.
+CallbackContext: {'history': '\nUser: what is the price of aapl\nAgent: The current price of Apple Inc. (AAPL) is $245.50.', 'session_id': 'session_1758407800976', 'user_id': 'user1', 'app_name': 'stock_analysis_app', 'seq': 12}
+-- Before model call hook executed.
+CallbackContext: {'history': '\nUser: what is the price of aapl\nAgent: The current price of Apple Inc. (AAPL) is $245.50.', 'session_id': 'session_1758407800976', 'user_id': 'user1', 'app_name': 'stock_analysis_app', 'seq': 12}, 
+LLM_Request: model='gemini-2.5-flash' contents=[Content(
+  parts=[
+    Part(
+      text='the high and low for AAPL'
+    ),
+  ],
+  role='user'
+)] config=GenerateContentConfig(
+  system_instruction="""you can gather information about stocks using yfinance api, 
+you can reflect upon the result and provide comprehensive details using data. Previous agent output: 
+User: what is the price of aapl
+Agent: The current price of Apple Inc. (AAPL) is $245.50.
+
+You are an agent. Your internal name is "info_gather_agent".
+
+ The description about you is "analyse provided ticker symbol"""",
+  tools=[
+    Tool(
+      function_declarations=[
+        FunctionDeclaration(
+          description="""
+Extract stock information for a given ticker symbol.
+ticker - string ticker symbol for the stock
+""",
+          name='extract_stock_info',
+          parameters=Schema(
+            properties={
+              <... Max depth ...>: <... Max depth ...>
+            },
+            required=[
+              <... Max depth ...>,
+            ],
+            type=<Type.OBJECT: 'OBJECT'>
+          )
+        ),
+      ]
+    ),
+  ]
+) live_connect_config=LiveConnectConfig() tools_dict={'extract_stock_info': <google.adk.tools.function_tool.FunctionTool object at 0x0000026818CB6C10>}
+-- After model call hook executed.
+CallbackContext: {'history': '\nUser: what is the price of aapl\nAgent: The current price of Apple Inc. (AAPL) is $245.50.', 'session_id': 'session_1758407800976', 'user_id': 'user1', 'app_name': 'stock_analysis_app', 'seq': 12}, 
+LLM_Response: content=Content(
+  parts=[
+    Part(
+      function_call=FunctionCall(
+        args={
+          'ticker': 'AAPL'
+        },
+        name='extract_stock_info'
+      ),
+      thought_signature=b'\n\x8d\x02\x01\xd1\xed\x8aoc\x98\xf4-\xbb7w\x19}\xf6\xf5\xb4\x18g\xd5mz\x929\xba\xc4\x17\xb6V\xb1\x96,\x80\x08d\xd7\x1b\xef\x06\x14M\x9dc\xd8\xd0\r/\x1bNQ\xf2P\x1cAD\xa5\x0c\x12\xca`\xf9\x8eOi\x88\x97Fw\x9d\x15dS\x18\xab\x83\xe1\xb2!\xf1\x01X\xc4\xe3\xe0\xc8\xcb\xe6\xe4\xdc\xa4\x8c\xc2?\x11...'
+    ),
+  ],
+  role='model'
+) grounding_metadata=None partial=None turn_complete=None finish_reason=<FinishReason.STOP: 'STOP'> error_code=None error_message=None interrupted=None custom_metadata=None usage_metadata=GenerateContentResponseUsageMetadata(
+  candidates_token_count=17,
+  prompt_token_count=156,
+  prompt_tokens_details=[
+    ModalityTokenCount(
+      modality=<MediaModality.TEXT: 'TEXT'>,
+      token_count=156
+    ),
+  ],
+  thoughts_token_count=58,
+  total_token_count=231
+) live_session_resumption_update=None input_transcription=None output_transcription=None
+-- Before tool call hook executed.
+Tool: extract_stock_info, 
+Args: {'ticker': 'AAPL'}, 
+ToolContext: <google.adk.sessions.state.State object at 0x0000026849F1B470>
+-- After tool call hook executed.
+Tool: extract_stock_info, 
+Args: {'ticker': 'AAPL'}, 
+ToolContext: <google.adk.sessions.state.State object at 0x0000026849F1B470>, 
+Output: {'address1': 'One Apple Park Way', 'city': 'Cupertino', 'state': 'CA', 'zip': '95014', 'country': 'United States', 'phone': '(408) 996-1010', 'website': 'https://www.apple.com', 'industry': 'Consumer Electronics', 'industryKey': 'consumer-electronics', 'industryDisp': 'Consumer Electronics', 'sector': 'Technology', 'sectorKey': 'technology', 'sectorDisp': 'Technology', 'longBusinessSummary': 'Apple Inc. designs, manufactures, and markets smartphones, personal computers, tablets, wearables, and accessories worldwide. The company offers iPhone, a line of smartphones; Mac, a line of personal computers; iPad, a line of multi-purpose tablets; and wearables, home, and accessories comprising AirPods, Apple TV, Apple Watch, Beats products, and HomePod. It also provides AppleCare support and cloud services; and operates various platforms, including the App Store that allow customers to discover and download applications and digital content, such as books, music, video, games, and podcasts, as well as advertising services include third-party licensing arrangements and its own advertising platforms. In addition, the company offers various subscription-based services, such as Apple Arcade, a game subscription service; Apple Fitness+, a personalized fitness service; Apple Music, which offers users a curated listening experience with on-demand radio stations; Apple News+, a subscription news and magazine service; Apple TV+, which offers exclusive original content; Apple Card, a co-branded credit card; and Apple Pay, a cashless payment service, as well as licenses its intellectual property. The company serves consumers, and small and mid-sized businesses; and the education, enterprise, and government markets. It distributes third-party applications for its products through the App Store. The company also sells its products through its retail and online stores, and direct sales force; and third-party cellular network carriers, wholesalers, retailers, and resellers. Apple Inc. was founded in 1976 and is headquartered in Cupertino, California.', 'fullTimeEmployees': 150000, 'companyOfficers': [{'maxAge': 1, 'name': 'Mr. Timothy D. Cook', 'age': 63, 'title': 'CEO & Director', 'yearBorn': 1961, 'fiscalYear': 2024, 'totalPay': 16520856, 'exercisedValue': 0, 'unexercisedValue': 0}, {'maxAge': 1, 'name': 'Ms. Katherine L. Adams', 'age': 60, 'title': 'Senior VP, General Counsel & Secretary', 'yearBorn': 1964, 'fiscalYear': 2024, 'totalPay': 5022182, 'exercisedValue': 0, 'unexercisedValue': 0}, {'maxAge': 1, 'name': "Ms. Deirdre  O'Brien", 'age': 57, 'title': 'Chief People Officer & Senior VP of Retail', 'yearBorn': 1967, 'fiscalYear': 2024, 'totalPay': 5022182, 'exercisedValue': 0, 'unexercisedValue': 0}, {'maxAge': 1, 'name': 'Mr. Jeffrey E. Williams', 'age': 60, 'title': 'Senior Vice President of Design, Watch, & Health', 'yearBorn': 1964, 'fiscalYear': 2024, 'totalPay': 5020737, 'exercisedValue': 0, 'unexercisedValue': 0}, {'maxAge': 1, 'name': 'Mr. Kevan  Parekh', 'age': 52, 'title': 'Senior VP & CFO', 'yearBorn': 1972, 'fiscalYear': 2024, 'exercisedValue': 0, 'unexercisedValue': 0}, {'maxAge': 1, 'name': 'Mr. Sabih  Khan', 'title': 'Chief Operating Officer', 'fiscalYear': 2024, 'exercisedValue': 0, 'unexercisedValue': 0}, {'maxAge': 1, 'name': 'Mr. Chris  Kondo', 'title': 'Senior Director of Corporate Accounting', 'fiscalYear': 2024, 'exercisedValue': 0, 'unexercisedValue': 0}, {'maxAge': 1, 'name': 'Suhasini  Chandramouli', 'title': 'Director of Investor Relations', 'fiscalYear': 2024, 'exercisedValue': 0, 'unexercisedValue': 0}, {'maxAge': 1, 'name': 'Ms. Kristin Huguet Quayle', 'title': 'Vice President of Worldwide Communications', 'fiscalYear': 2024, 'exercisedValue': 0, 'unexercisedValue': 0}, {'maxAge': 1, 'name': 'Mr. Greg  Joswiak', 'title': 'Senior Vice President of Worldwide Marketing', 'fiscalYear': 2024, 'exercisedValue': 0, 'unexercisedValue': 0}], 'auditRisk': 7, 'boardRisk': 1, 'compensationRisk': 3, 'shareHolderRightsRisk': 1, 'overallRisk': 1, 'governanceEpochDate': 1756684800, 'compensationAsOfEpochDate': 1735603200, 'irWebsite': 'http://investor.apple.com/', 'executiveTeam': [], 'maxAge': 86400, 'priceHint': 2, 'previousClose': 237.88, 'open': 241.175, 'dayLow': 240.2106, 'dayHigh': 246.27, 'regularMarketPreviousClose': 237.88, 'regularMarketOpen': 241.175, 'regularMarketDayLow': 240.2106, 'regularMarketDayHigh': 246.3, 'dividendRate': 1.04, 'dividendYield': 0.42, 'exDividendDate': 1754870400, 'payoutRatio': 0.1533, 'fiveYearAvgDividendYield': 0.54, 'beta': 1.109, 'trailingPE': 37.31003, 'forwardPE': 29.542719, 'volume': 162456387, 'regularMarketVolume': 162456387, 'averageVolume': 56212347, 'averageVolume10days': 66513550, 'averageDailyVolume10Day': 66513550, 'bid': 240.0, 'ask': 258.21, 'bidSize': 1, 'askSize': 1, 'marketCap': 3643315585024, 'fiftyTwoWeekLow': 169.21, 'fiftyTwoWeekHigh': 260.1, 'priceToSalesTrailing12Months': 8.916038, 'fiftyDayAverage': 223.929, 'twoHundredDayAverage': 221.6535, 'trailingAnnualDividendRate': 1.01, 'trailingAnnualDividendYield': 0.004245838, 'currency': 'USD', 'tradeable': False, 'enterpriseValue': 3689641672704, 'profitMargins': 0.24295999, 'floatShares': 14814419318, 'sharesOutstanding': 14840390000, 'sharesShort': 113582365, 'sharesShortPriorMonth': 104634941, 'sharesShortPreviousMonthDate': 1753920000, 'dateShortInterest': 1756425600, 'sharesPercentSharesOut': 0.0077, 'heldPercentInsiders': 0.0197, 'heldPercentInstitutions': 0.63643, 'shortRatio': 1.95, 'shortPercentOfFloat': 0.0077, 'impliedSharesOutstanding': 15318899712, 'bookValue': 4.431, 'priceToBook': 55.405098, 'lastFiscalYearEnd': 1727481600, 'nextFiscalYearEnd': 1759017600, 'mostRecentQuarter': 1751068800, 'earningsQuarterlyGrowth': 0.093, 'netIncomeToCommon': 99280003072, 'trailingEps': 6.58, 'forwardEps': 8.31, 'lastSplitFactor': '4:1', 'lastSplitDate': 1598832000, 'enterpriseToRevenue': 9.029, 'enterpriseToEbitda': 26.039, '52WeekChange': 0.08402884, 'SandP52WeekChange': 0.1653893, 'lastDividendValue': 0.26, 'lastDividendDate': 1754870400, 'quoteType': 'EQUITY', 'currentPrice': 245.5, 'targetHighPrice': 300.0, 'targetLowPrice': 175.0, 'targetMeanPrice': 241.31557, 'targetMedianPrice': 243.0, 'recommendationMean': 2.02128, 'recommendationKey': 'buy', 'numberOfAnalystOpinions': 40, 'totalCash': 55372001280, 'totalCashPerShare': 3.731, 'ebitda': 141696008192, 'totalDebt': 101698002944, 'quickRatio': 0.724, 'currentRatio': 0.868, 'totalRevenue': 408624988160, 'debtToEquity': 154.486, 'revenuePerShare': 27.173, 'returnOnAssets': 0.24545999, 'returnOnEquity': 1.49814, 'grossProfits': 190739005440, 'freeCashflow': 94873747456, 'operatingCashflow': 108564996096, 'earningsGrowth': 0.121, 'revenueGrowth': 0.096, 'grossMargins': 0.46678, 'ebitdaMargins': 0.34675997, 'operatingMargins': 0.29990998, 'financialCurrency': 'USD', 'symbol': 'AAPL', 'language': 'en-US', 'region': 'US', 'typeDisp': 'Equity', 'quoteSourceName': 'Delayed Quote', 'triggerable': True, 'customPriceAlertConfidence': 'HIGH', 'dividendDate': 1755129600, 'earningsTimestamp': 1753992000, 'earningsTimestampStart': 1761854400, 'earningsTimestampEnd': 1761854400, 'earningsCallTimestampStart': 1753995600, 'earningsCallTimestampEnd': 1753995600, 'isEarningsDateEstimate': True, 'epsTrailingTwelveMonths': 6.58, 'epsForward': 8.31, 'epsCurrentYear': 7.38448, 'priceEpsCurrentYear': 33.2454, 'fiftyDayAverageChange': 21.571, 'fiftyDayAverageChangePercent': 0.09632964, 'twoHundredDayAverageChange': 23.846497, 'twoHundredDayAverageChangePercent': 0.107584566, 'sourceInterval': 15, 'exchangeDataDelayedBy': 0, 'averageAnalystRating': '2.0 - Buy', 'shortName': 'Apple Inc.', 'longName': 'Apple Inc.', 'regularMarketChangePercent': 3.20329, 'regularMarketPrice': 245.5, 'corporateActions': [], 'postMarketTime': 1758326399, 'regularMarketTime': 1758312002, 'exchange': 'NMS', 'messageBoardId': 'finmb_24937', 'exchangeTimezoneName': 'America/New_York', 'exchangeTimezoneShortName': 'EDT', 'gmtOffSetMilliseconds': -14400000, 'market': 'us_market', 'esgPopulated': False, 'postMarketChangePercent': 0.07739407, 'postMarketPrice': 245.69, 'postMarketChange': 0.19000244, 'regularMarketChange': 7.62, 'regularMarketDayRange': '240.2106 - 246.3', 'fullExchangeName': 'NasdaqGS', 'averageDailyVolume3Month': 56212347, 'fiftyTwoWeekLowChange': 76.28999, 'fiftyTwoWeekLowChangePercent': 0.4508598, 'fiftyTwoWeekRange': '169.21 - 260.1', 'fiftyTwoWeekHighChange': -14.600006, 'fiftyTwoWeekHighChangePercent': -0.05613228, 'fiftyTwoWeekChangePercent': 8.402884, 'cryptoTradeable': False, 'hasPrePostMarketData': True, 'firstTradeDateMilliseconds': 345479400000, 'marketState': 'CLOSED', 'displayName': 'Apple', 'trailingPegRatio': 2.3591}
+-- Before model call hook executed.
+CallbackContext: {'history': '\nUser: what is the price of aapl\nAgent: The current price of Apple Inc. (AAPL) is $245.50.', 'session_id': 'session_1758407800976', 'user_id': 'user1', 'app_name': 'stock_analysis_app', 'seq': 12}, 
+LLM_Request: model='gemini-2.5-flash' contents=[Content(
+  parts=[
+    Part(
+      text='the high and low for AAPL'
+    ),
+  ],
+  role='user'
+), Content(
+  parts=[
+    Part(
+      function_call=FunctionCall(
+        args={
+          'ticker': 'AAPL'
+        },
+        name='extract_stock_info'
+      ),
+      thought_signature=b'\n\x8d\x02\x01\xd1\xed\x8aoc\x98\xf4-\xbb7w\x19}\xf6\xf5\xb4\x18g\xd5mz\x929\xba\xc4\x17\xb6V\xb1\x96,\x80\x08d\xd7\x1b\xef\x06\x14M\x9dc\xd8\xd0\r/\x1bNQ\xf2P\x1cAD\xa5\x0c\x12\xca`\xf9\x8eOi\x88\x97Fw\x9d\x15dS\x18\xab\x83\xe1\xb2!\xf1\x01X\xc4\xe3\xe0\xc8\xcb\xe6\xe4\xdc\xa4\x8c\xc2?\x11...'
+    ),
+  ],
+  role='model'
+), Content(
+  parts=[
+    Part(
+      function_response=FunctionResponse(
+        name='extract_stock_info',
+        response=<dict len=180>
+      )
+    ),
+  ],
+  role='user'
+)] config=GenerateContentConfig(
+  system_instruction="""you can gather information about stocks using yfinance api, 
+you can reflect upon the result and provide comprehensive details using data. Previous agent output: 
+User: what is the price of aapl
+Agent: The current price of Apple Inc. (AAPL) is $245.50.
+
+You are an agent. Your internal name is "info_gather_agent".
+
+ The description about you is "analyse provided ticker symbol"""",
+  tools=[
+    Tool(
+      function_declarations=[
+        FunctionDeclaration(
+          description="""
+Extract stock information for a given ticker symbol.
+ticker - string ticker symbol for the stock
+""",
+          name='extract_stock_info',
+          parameters=Schema(
+            properties={
+              <... Max depth ...>: <... Max depth ...>
+            },
+            required=[
+              <... Max depth ...>,
+            ],
+            type=<Type.OBJECT: 'OBJECT'>
+          )
+        ),
+      ]
+    ),
+  ]
+) live_connect_config=LiveConnectConfig() tools_dict={'extract_stock_info': <google.adk.tools.function_tool.FunctionTool object at 0x0000026849F7AEA0>}
+-- After model call hook executed.
+CallbackContext: {'history': '\nUser: what is the price of aapl\nAgent: The current price of Apple Inc. (AAPL) is $245.50.', 'session_id': 'session_1758407800976', 'user_id': 'user1', 'app_name': 'stock_analysis_app', 'seq': 12}, 
+LLM_Response: content=Content(
+  parts=[
+    Part(
+      text='Today, Apple Inc. (AAPL) reached a high of $246.27 and a low of $240.21. Its 52-week high is $260.10 and its 52-week low is $169.21.',
+      thought_signature=b'\n\xb0\x03\x01\xd1\xed\x8ao\xd66\xe1j\x93\x9fC-\x8a\xac\xdf\xdd\x96:3\xe2~\xd3\x14\xb7C\xebs_`7\x12f\xf9\xc3\x00\xab\xbf\x04\xdcF\x17\rfa\x19\xff\xda\xbcI\x01P\xcf\x9bi\xaa\xce\x82\xd2\xac4\x85\xfc\xd4\xb5\x07\x19\x97\x89`M\x92\x90\xf2$P\x8a#:\xa8\x955\xa3pt\x8d\xeby\x07\x88a\xa7\xa1n...'
+    ),
+  ],
+  role='model'
+) grounding_metadata=None partial=None turn_complete=None finish_reason=<FinishReason.STOP: 'STOP'> error_code=None error_message=None interrupted=None custom_metadata=None usage_metadata=GenerateContentResponseUsageMetadata(
+  candidates_token_count=63,
+  prompt_token_count=3536,
+  prompt_tokens_details=[
+    ModalityTokenCount(
+      modality=<MediaModality.TEXT: 'TEXT'>,
+      token_count=3536
+    ),
+  ],
+  thoughts_token_count=108,
+  total_token_count=3707
+) live_session_resumption_update=None input_transcription=None output_transcription=None
+-- After agent call hook executed.
+CallbackContext: {'history': '\nUser: what is the price of aapl\nAgent: The current price of Apple Inc. (AAPL) is $245.50.', 'session_id': 'session_1758407800976', 'user_id': 'user1', 'app_name': 'stock_analysis_app', 'seq': 12, 'result': 'Today, Apple Inc. (AAPL) reached a high of $246.27 and a low of $240.21. Its 52-week high is $260.10 and its 52-week low is $169.21.'}
+-- Before agent call hook executed.
+CallbackContext: {'session_id': 'session_1758408340073', 'user_id': 'user1', 'app_name': 'stock_analysis_app', 'seq': 4}
+-- Before model call hook executed.
+CallbackContext: {'session_id': 'session_1758408340073', 'user_id': 'user1', 'app_name': 'stock_analysis_app', 'seq': 5}, 
+LLM_Request: model='gemini-2.5-flash' contents=[Content(
+  parts=[
+    Part(
+      text='price of aapl'
+    ),
+  ],
+  role='user'
+)] config=GenerateContentConfig(
+  system_instruction="""you can gather information about stocks using yfinance api, 
+you can reflect upon the result and provide comprehensive details using data. Previous agent output: 
+
+You are an agent. Your internal name is "info_gather_agent".
+
+ The description about you is "analyse provided ticker symbol"""",
+  tools=[
+    Tool(
+      function_declarations=[
+        FunctionDeclaration(
+          description="""
+Extract stock information for a given ticker symbol.
+ticker - string ticker symbol for the stock
+""",
+          name='extract_stock_info',
+          parameters=Schema(
+            properties={
+              <... Max depth ...>: <... Max depth ...>
+            },
+            required=[
+              <... Max depth ...>,
+            ],
+            type=<Type.OBJECT: 'OBJECT'>
+          )
+        ),
+      ]
+    ),
+  ]
+) live_connect_config=LiveConnectConfig() tools_dict={'extract_stock_info': <google.adk.tools.function_tool.FunctionTool object at 0x000001D56379E270>}
+-- After model call hook executed.
+CallbackContext: {'session_id': 'session_1758408340073', 'user_id': 'user1', 'app_name': 'stock_analysis_app', 'seq': 6}, 
+LLM_Response: content=Content(
+  parts=[
+    Part(
+      function_call=FunctionCall(
+        args={
+          'ticker': 'AAPL'
+        },
+        name='extract_stock_info'
+      ),
+      thought_signature=b'\n\xe9\x01\x01\xd1\xed\x8ao\xe9E\x85R\xdd\x88\xb0\xd4\x10,}\x90\xda\xdedY\xf7\xe8Z\xe4L-\xd8\xc4\xeb\x1dd\xd6\x93\xaf%\xc8~PAj\xee\xd1\x7f\xe7\xd6w\xfe\xa8\xca\x8b\xe4\xa3\xa4Z\xa3\xfa]L;\xa5\xfb\xe8\x83\xf1\xc2?\xba"\xc8\xdc\xb4~\xe4\xf3\x9e\xde\x02.\xa7\xc1\xddr%\x8f\x9d~\r07\x8a/\xfd\x1b...'
+    ),
+  ],
+  role='model'
+) grounding_metadata=None partial=None turn_complete=None finish_reason=<FinishReason.STOP: 'STOP'> error_code=None error_message=None interrupted=None custom_metadata=None usage_metadata=GenerateContentResponseUsageMetadata(
+  candidates_token_count=17,
+  prompt_token_count=121,
+  prompt_tokens_details=[
+    ModalityTokenCount(
+      modality=<MediaModality.TEXT: 'TEXT'>,
+      token_count=121
+    ),
+  ],
+  thoughts_token_count=51,
+  total_token_count=189
+) live_session_resumption_update=None input_transcription=None output_transcription=None
+-- Before tool call hook executed.
+Tool: extract_stock_info, 
+Args: {'ticker': 'AAPL'}, 
+ToolContext: <google.adk.sessions.state.State object at 0x000001D53245B2F0>
+-- After tool call hook executed.
+Tool: extract_stock_info, 
+Args: {'ticker': 'AAPL'}, 
+ToolContext: <google.adk.sessions.state.State object at 0x000001D53245B2F0>, 
+Output: {'address1': 'One Apple Park Way', 'city': 'Cupertino', 'state': 'CA', 'zip': '95014', 'country': 'United States', 'phone': '(408) 996-1010', 'website': 'https://www.apple.com', 'industry': 'Consumer Electronics', 'industryKey': 'consumer-electronics', 'industryDisp': 'Consumer Electronics', 'sector': 'Technology', 'sectorKey': 'technology', 'sectorDisp': 'Technology', 'longBusinessSummary': 'Apple Inc. designs, manufactures, and markets smartphones, personal computers, tablets, wearables, and accessories worldwide. The company offers iPhone, a line of smartphones; Mac, a line of personal computers; iPad, a line of multi-purpose tablets; and wearables, home, and accessories comprising AirPods, Apple TV, Apple Watch, Beats products, and HomePod. It also provides AppleCare support and cloud services; and operates various platforms, including the App Store that allow customers to discover and download applications and digital content, such as books, music, video, games, and podcasts, as well as advertising services include third-party licensing arrangements and its own advertising platforms. In addition, the company offers various subscription-based services, such as Apple Arcade, a game subscription service; Apple Fitness+, a personalized fitness service; Apple Music, which offers users a curated listening experience with on-demand radio stations; Apple News+, a subscription news and magazine service; Apple TV+, which offers exclusive original content; Apple Card, a co-branded credit card; and Apple Pay, a cashless payment service, as well as licenses its intellectual property. The company serves consumers, and small and mid-sized businesses; and the education, enterprise, and government markets. It distributes third-party applications for its products through the App Store. The company also sells its products through its retail and online stores, and direct sales force; and third-party cellular network carriers, wholesalers, retailers, and resellers. Apple Inc. was founded in 1976 and is headquartered in Cupertino, California.', 'fullTimeEmployees': 150000, 'companyOfficers': [{'maxAge': 1, 'name': 'Mr. Timothy D. Cook', 'age': 63, 'title': 'CEO & Director', 'yearBorn': 1961, 'fiscalYear': 2024, 'totalPay': 16520856, 'exercisedValue': 0, 'unexercisedValue': 0}, {'maxAge': 1, 'name': 'Ms. Katherine L. Adams', 'age': 60, 'title': 'Senior VP, General Counsel & Secretary', 'yearBorn': 1964, 'fiscalYear': 2024, 'totalPay': 5022182, 'exercisedValue': 0, 'unexercisedValue': 0}, {'maxAge': 1, 'name': "Ms. Deirdre  O'Brien", 'age': 57, 'title': 'Chief People Officer & Senior VP of Retail', 'yearBorn': 1967, 'fiscalYear': 2024, 'totalPay': 5022182, 'exercisedValue': 0, 'unexercisedValue': 0}, {'maxAge': 1, 'name': 'Mr. Jeffrey E. Williams', 'age': 60, 'title': 'Senior Vice President of Design, Watch, & Health', 'yearBorn': 1964, 'fiscalYear': 2024, 'totalPay': 5020737, 'exercisedValue': 0, 'unexercisedValue': 0}, {'maxAge': 1, 'name': 'Mr. Kevan  Parekh', 'age': 52, 'title': 'Senior VP & CFO', 'yearBorn': 1972, 'fiscalYear': 2024, 'exercisedValue': 0, 'unexercisedValue': 0}, {'maxAge': 1, 'name': 'Mr. Sabih  Khan', 'title': 'Chief Operating Officer', 'fiscalYear': 2024, 'exercisedValue': 0, 'unexercisedValue': 0}, {'maxAge': 1, 'name': 'Mr. Chris  Kondo', 'title': 'Senior Director of Corporate Accounting', 'fiscalYear': 2024, 'exercisedValue': 0, 'unexercisedValue': 0}, {'maxAge': 1, 'name': 'Suhasini  Chandramouli', 'title': 'Director of Investor Relations', 'fiscalYear': 2024, 'exercisedValue': 0, 'unexercisedValue': 0}, {'maxAge': 1, 'name': 'Ms. Kristin Huguet Quayle', 'title': 'Vice President of Worldwide Communications', 'fiscalYear': 2024, 'exercisedValue': 0, 'unexercisedValue': 0}, {'maxAge': 1, 'name': 'Mr. Greg  Joswiak', 'title': 'Senior Vice President of Worldwide Marketing', 'fiscalYear': 2024, 'exercisedValue': 0, 'unexercisedValue': 0}], 'auditRisk': 7, 'boardRisk': 1, 'compensationRisk': 3, 'shareHolderRightsRisk': 1, 'overallRisk': 1, 'governanceEpochDate': 1756684800, 'compensationAsOfEpochDate': 1735603200, 'irWebsite': 'http://investor.apple.com/', 'executiveTeam': [], 'maxAge': 86400, 'priceHint': 2, 'previousClose': 237.88, 'open': 241.175, 'dayLow': 240.2106, 'dayHigh': 246.27, 'regularMarketPreviousClose': 237.88, 'regularMarketOpen': 241.175, 'regularMarketDayLow': 240.2106, 'regularMarketDayHigh': 246.3, 'dividendRate': 1.04, 'dividendYield': 0.42, 'exDividendDate': 1754870400, 'payoutRatio': 0.1533, 'fiveYearAvgDividendYield': 0.54, 'beta': 1.109, 'trailingPE': 37.31003, 'forwardPE': 29.542719, 'volume': 162456387, 'regularMarketVolume': 162456387, 'averageVolume': 56212347, 'averageVolume10days': 66513550, 'averageDailyVolume10Day': 66513550, 'bid': 240.0, 'ask': 258.21, 'bidSize': 1, 'askSize': 1, 'marketCap': 3643315585024, 'fiftyTwoWeekLow': 169.21, 'fiftyTwoWeekHigh': 260.1, 'priceToSalesTrailing12Months': 8.916038, 'fiftyDayAverage': 223.929, 'twoHundredDayAverage': 221.6535, 'trailingAnnualDividendRate': 1.01, 'trailingAnnualDividendYield': 0.004245838, 'currency': 'USD', 'tradeable': False, 'enterpriseValue': 3689641672704, 'profitMargins': 0.24295999, 'floatShares': 14814419318, 'sharesOutstanding': 14840390000, 'sharesShort': 113582365, 'sharesShortPriorMonth': 104634941, 'sharesShortPreviousMonthDate': 1753920000, 'dateShortInterest': 1756425600, 'sharesPercentSharesOut': 0.0077, 'heldPercentInsiders': 0.0197, 'heldPercentInstitutions': 0.63643, 'shortRatio': 1.95, 'shortPercentOfFloat': 0.0077, 'impliedSharesOutstanding': 15318899712, 'bookValue': 4.431, 'priceToBook': 55.405098, 'lastFiscalYearEnd': 1727481600, 'nextFiscalYearEnd': 1759017600, 'mostRecentQuarter': 1751068800, 'earningsQuarterlyGrowth': 0.093, 'netIncomeToCommon': 99280003072, 'trailingEps': 6.58, 'forwardEps': 8.31, 'lastSplitFactor': '4:1', 'lastSplitDate': 1598832000, 'enterpriseToRevenue': 9.029, 'enterpriseToEbitda': 26.039, '52WeekChange': 0.08402884, 'SandP52WeekChange': 0.1653893, 'lastDividendValue': 0.26, 'lastDividendDate': 1754870400, 'quoteType': 'EQUITY', 'currentPrice': 245.5, 'targetHighPrice': 300.0, 'targetLowPrice': 175.0, 'targetMeanPrice': 241.31557, 'targetMedianPrice': 243.0, 'recommendationMean': 2.02128, 'recommendationKey': 'buy', 'numberOfAnalystOpinions': 40, 'totalCash': 55372001280, 'totalCashPerShare': 3.731, 'ebitda': 141696008192, 'totalDebt': 101698002944, 'quickRatio': 0.724, 'currentRatio': 0.868, 'totalRevenue': 408624988160, 'debtToEquity': 154.486, 'revenuePerShare': 27.173, 'returnOnAssets': 0.24545999, 'returnOnEquity': 1.49814, 'grossProfits': 190739005440, 'freeCashflow': 94873747456, 'operatingCashflow': 108564996096, 'earningsGrowth': 0.121, 'revenueGrowth': 0.096, 'grossMargins': 0.46678, 'ebitdaMargins': 0.34675997, 'operatingMargins': 0.29990998, 'financialCurrency': 'USD', 'symbol': 'AAPL', 'language': 'en-US', 'region': 'US', 'typeDisp': 'Equity', 'quoteSourceName': 'Delayed Quote', 'triggerable': True, 'customPriceAlertConfidence': 'HIGH', 'fullExchangeName': 'NasdaqGS', 'averageDailyVolume3Month': 56212347, 'fiftyTwoWeekLowChange': 76.28999, 'fiftyTwoWeekLowChangePercent': 0.4508598, 'fiftyTwoWeekRange': '169.21 - 260.1', 'fiftyTwoWeekHighChange': -14.600006, 'fiftyTwoWeekHighChangePercent': -0.05613228, 'fiftyTwoWeekChangePercent': 8.402884, 'dividendDate': 1755129600, 'earningsTimestamp': 1753992000, 'earningsTimestampStart': 1761854400, 'earningsTimestampEnd': 1761854400, 'earningsCallTimestampStart': 1753995600, 'earningsCallTimestampEnd': 1753995600, 'isEarningsDateEstimate': True, 'epsTrailingTwelveMonths': 6.58, 'epsForward': 8.31, 'epsCurrentYear': 7.38448, 'priceEpsCurrentYear': 33.2454, 'fiftyDayAverageChange': 21.571, 'fiftyDayAverageChangePercent': 0.09632964, 'twoHundredDayAverageChange': 23.846497, 'twoHundredDayAverageChangePercent': 0.107584566, 'sourceInterval': 15, 'exchangeDataDelayedBy': 0, 'averageAnalystRating': '2.0 - Buy', 'cryptoTradeable': False, 'corporateActions': [], 'postMarketTime': 1758326399, 'regularMarketTime': 1758312002, 'exchange': 'NMS', 'messageBoardId': 'finmb_24937', 'exchangeTimezoneName': 'America/New_York', 'exchangeTimezoneShortName': 'EDT', 'gmtOffSetMilliseconds': -14400000, 'market': 'us_market', 'esgPopulated': False, 'regularMarketChangePercent': 3.20329, 'regularMarketPrice': 245.5, 'shortName': 'Apple Inc.', 'longName': 'Apple Inc.', 'marketState': 'CLOSED', 'postMarketChangePercent': 0.07739407, 'postMarketPrice': 245.69, 'postMarketChange': 0.19000244, 'regularMarketChange': 7.62, 'regularMarketDayRange': '240.2106 - 246.3', 'hasPrePostMarketData': True, 'firstTradeDateMilliseconds': 345479400000, 'displayName': 'Apple', 'trailingPegRatio': 2.3591}
+-- Before model call hook executed.
+CallbackContext: {'session_id': 'session_1758408340073', 'user_id': 'user1', 'app_name': 'stock_analysis_app', 'seq': 9}, 
+LLM_Request: model='gemini-2.5-flash' contents=[Content(
+  parts=[
+    Part(
+      text='price of aapl'
+    ),
+  ],
+  role='user'
+), Content(
+  parts=[
+    Part(
+      function_call=FunctionCall(
+        args={
+          'ticker': 'AAPL'
+        },
+        name='extract_stock_info'
+      ),
+      thought_signature=b'\n\xe9\x01\x01\xd1\xed\x8ao\xe9E\x85R\xdd\x88\xb0\xd4\x10,}\x90\xda\xdedY\xf7\xe8Z\xe4L-\xd8\xc4\xeb\x1dd\xd6\x93\xaf%\xc8~PAj\xee\xd1\x7f\xe7\xd6w\xfe\xa8\xca\x8b\xe4\xa3\xa4Z\xa3\xfa]L;\xa5\xfb\xe8\x83\xf1\xc2?\xba"\xc8\xdc\xb4~\xe4\xf3\x9e\xde\x02.\xa7\xc1\xddr%\x8f\x9d~\r07\x8a/\xfd\x1b...'
+    ),
+  ],
+  role='model'
+), Content(
+  parts=[
+    Part(
+      function_response=FunctionResponse(
+        name='extract_stock_info',
+        response=<dict len=180>
+      )
+    ),
+  ],
+  role='user'
+)] config=GenerateContentConfig(
+  system_instruction="""you can gather information about stocks using yfinance api, 
+you can reflect upon the result and provide comprehensive details using data. Previous agent output: 
+
+You are an agent. Your internal name is "info_gather_agent".
+
+ The description about you is "analyse provided ticker symbol"""",
+  tools=[
+    Tool(
+      function_declarations=[
+        FunctionDeclaration(
+          description="""
+Extract stock information for a given ticker symbol.
+ticker - string ticker symbol for the stock
+""",
+          name='extract_stock_info',
+          parameters=Schema(
+            properties={
+              <... Max depth ...>: <... Max depth ...>
+            },
+            required=[
+              <... Max depth ...>,
+            ],
+            type=<Type.OBJECT: 'OBJECT'>
+          )
+        ),
+      ]
+    ),
+  ]
+) live_connect_config=LiveConnectConfig() tools_dict={'extract_stock_info': <google.adk.tools.function_tool.FunctionTool object at 0x000001D53251BB10>}
+-- After model call hook executed.
+CallbackContext: {'session_id': 'session_1758408340073', 'user_id': 'user1', 'app_name': 'stock_analysis_app', 'seq': 10}, 
+LLM_Response: content=Content(
+  parts=[
+    Part(
+      text='The current price of AAPL is 245.5 USD.',
+      thought_signature=b'\n\xed\x03\x01\xd1\xed\x8ao\x0eC\xd49\\\xc8\xaf\xfc\xe7\xf2\x9fM\x8f0\x95U\x10\xedm\x90ch\x18\xea\x1eymf\xf8\xf5gW\x81\xce\xafI\xe2\xa6-Y[\x16U\x04\x9a\xd1\x12C\xd9\x86(\x1dl\xdbp\xc6}\x11\xe8)w\x16>\xfa\xf6\x1b4\x14\xde\x8cC\xde\xd7J\xc4\x94\xbe4c\xdc\xb5M}\xafMTk\x18o...'
+    ),
+  ],
+  role='model'
+) grounding_metadata=None partial=None turn_complete=None finish_reason=<FinishReason.STOP: 'STOP'> error_code=None error_message=None interrupted=None custom_metadata=None usage_metadata=GenerateContentResponseUsageMetadata(
+  candidates_token_count=15,
+  prompt_token_count=3501,
+  prompt_tokens_details=[
+    ModalityTokenCount(
+      modality=<MediaModality.TEXT: 'TEXT'>,
+      token_count=3501
+    ),
+  ],
+  thoughts_token_count=146,
+  total_token_count=3662
+) live_session_resumption_update=None input_transcription=None output_transcription=None
+-- After agent call hook executed.
+CallbackContext: {'session_id': 'session_1758408340073', 'user_id': 'user1', 'app_name': 'stock_analysis_app', 'seq': 11, 'result': 'The current price of AAPL is 245.5 USD.'}
+-- Before agent call hook executed.
+CallbackContext: {'history': '\nUser: what is the price of aapl\nAgent: The current price of AAPL is 245.5 USD.', 'session_id': 'session_1758408340073', 'user_id': 'user1', 'app_name': 'stock_analysis_app', 'seq': 20}
+-- Before model call hook executed.
+CallbackContext: {'history': '\nUser: what is the price of aapl\nAgent: The current price of AAPL is 245.5 USD.', 'session_id': 'session_1758408340073', 'user_id': 'user1', 'app_name': 'stock_analysis_app', 'seq': 21}, 
+LLM_Request: model='gemini-2.5-flash' contents=[Content(
+  parts=[
+    Part(
+      text='AAPL high and low'
+    ),
+  ],
+  role='user'
+)] config=GenerateContentConfig(
+  system_instruction="""you can gather information about stocks using yfinance api, 
+you can reflect upon the result and provide comprehensive details using data. Previous agent output: 
+User: what is the price of aapl
+Agent: The current price of AAPL is 245.5 USD.
+
+You are an agent. Your internal name is "info_gather_agent".
+
+ The description about you is "analyse provided ticker symbol"""",
+  tools=[
+    Tool(
+      function_declarations=[
+        FunctionDeclaration(
+          description="""
+Extract stock information for a given ticker symbol.
+ticker - string ticker symbol for the stock
+""",
+          name='extract_stock_info',
+          parameters=Schema(
+            properties={
+              <... Max depth ...>: <... Max depth ...>
+            },
+            required=[
+              <... Max depth ...>,
+            ],
+            type=<Type.OBJECT: 'OBJECT'>
+          )
+        ),
+      ]
+    ),
+  ]
+) live_connect_config=LiveConnectConfig() tools_dict={'extract_stock_info': <google.adk.tools.function_tool.FunctionTool object at 0x000001D5636F8F50>}
+-- After model call hook executed.
+CallbackContext: {'history': '\nUser: what is the price of aapl\nAgent: The current price of AAPL is 245.5 USD.', 'session_id': 'session_1758408340073', 'user_id': 'user1', 'app_name': 'stock_analysis_app', 'seq': 22}, 
+LLM_Response: content=Content(
+  parts=[
+    Part(
+      function_call=FunctionCall(
+        args={
+          'ticker': 'AAPL'
+        },
+        name='extract_stock_info'
+      ),
+      thought_signature=b'\n\xb9\x02\x01\xd1\xed\x8ao`\xd5"\x18&\xb2\xf7\x10\xd7B\xf4py|V`a\x98xyj\xc5\x87\xca\xbd\xbaVP\x88K%\xf6\x8cl0E^\xb2J\x0e0W\xa6\xd4R\xc0+3\xf8\xb0\xfe1rB\xd9\x89]n\xf3\x93\x99\xaa\xa1\r\xfe\x1e@\xc8\xd8*\\\x0f\xe0\x8486\xd3\xdb\xefx\xaa\x03J\xe3\xeeA\x07&,...'
+    ),
+  ],
+  role='model'
+) grounding_metadata=None partial=None turn_complete=None finish_reason=<FinishReason.STOP: 'STOP'> error_code=None error_message=None interrupted=None custom_metadata=None usage_metadata=GenerateContentResponseUsageMetadata(
+  candidates_token_count=17,
+  prompt_token_count=149,
+  prompt_tokens_details=[
+    ModalityTokenCount(
+      modality=<MediaModality.TEXT: 'TEXT'>,
+      token_count=149
+    ),
+  ],
+  thoughts_token_count=68,
+  total_token_count=234
+) live_session_resumption_update=None input_transcription=None output_transcription=None
+-- Before tool call hook executed.
+Tool: extract_stock_info, 
+Args: {'ticker': 'AAPL'}, 
+ToolContext: <google.adk.sessions.state.State object at 0x000001D56384FD10>
+-- After tool call hook executed.
+Tool: extract_stock_info, 
+Args: {'ticker': 'AAPL'}, 
+ToolContext: <google.adk.sessions.state.State object at 0x000001D56384FD10>, 
+Output: {'address1': 'One Apple Park Way', 'city': 'Cupertino', 'state': 'CA', 'zip': '95014', 'country': 'United States', 'phone': '(408) 996-1010', 'website': 'https://www.apple.com', 'industry': 'Consumer Electronics', 'industryKey': 'consumer-electronics', 'industryDisp': 'Consumer Electronics', 'sector': 'Technology', 'sectorKey': 'technology', 'sectorDisp': 'Technology', 'longBusinessSummary': 'Apple Inc. designs, manufactures, and markets smartphones, personal computers, tablets, wearables, and accessories worldwide. The company offers iPhone, a line of smartphones; Mac, a line of personal computers; iPad, a line of multi-purpose tablets; and wearables, home, and accessories comprising AirPods, Apple TV, Apple Watch, Beats products, and HomePod. It also provides AppleCare support and cloud services; and operates various platforms, including the App Store that allow customers to discover and download applications and digital content, such as books, music, video, games, and podcasts, as well as advertising services include third-party licensing arrangements and its own advertising platforms. In addition, the company offers various subscription-based services, such as Apple Arcade, a game subscription service; Apple Fitness+, a personalized fitness service; Apple Music, which offers users a curated listening experience with on-demand radio stations; Apple News+, a subscription news and magazine service; Apple TV+, which offers exclusive original content; Apple Card, a co-branded credit card; and Apple Pay, a cashless payment service, as well as licenses its intellectual property. The company serves consumers, and small and mid-sized businesses; and the education, enterprise, and government markets. It distributes third-party applications for its products through the App Store. The company also sells its products through its retail and online stores, and direct sales force; and third-party cellular network carriers, wholesalers, retailers, and resellers. Apple Inc. was founded in 1976 and is headquartered in Cupertino, California.', 'fullTimeEmployees': 150000, 'companyOfficers': [{'maxAge': 1, 'name': 'Mr. Timothy D. Cook', 'age': 63, 'title': 'CEO & Director', 'yearBorn': 1961, 'fiscalYear': 2024, 'totalPay': 16520856, 'exercisedValue': 0, 'unexercisedValue': 0}, {'maxAge': 1, 'name': 'Ms. Katherine L. Adams', 'age': 60, 'title': 'Senior VP, General Counsel & Secretary', 'yearBorn': 1964, 'fiscalYear': 2024, 'totalPay': 5022182, 'exercisedValue': 0, 'unexercisedValue': 0}, {'maxAge': 1, 'name': "Ms. Deirdre  O'Brien", 'age': 57, 'title': 'Chief People Officer & Senior VP of Retail', 'yearBorn': 1967, 'fiscalYear': 2024, 'totalPay': 5022182, 'exercisedValue': 0, 'unexercisedValue': 0}, {'maxAge': 1, 'name': 'Mr. Jeffrey E. Williams', 'age': 60, 'title': 'Senior Vice President of Design, Watch, & Health', 'yearBorn': 1964, 'fiscalYear': 2024, 'totalPay': 5020737, 'exercisedValue': 0, 'unexercisedValue': 0}, {'maxAge': 1, 'name': 'Mr. Kevan  Parekh', 'age': 52, 'title': 'Senior VP & CFO', 'yearBorn': 1972, 'fiscalYear': 2024, 'exercisedValue': 0, 'unexercisedValue': 0}, {'maxAge': 1, 'name': 'Mr. Sabih  Khan', 'title': 'Chief Operating Officer', 'fiscalYear': 2024, 'exercisedValue': 0, 'unexercisedValue': 0}, {'maxAge': 1, 'name': 'Mr. Chris  Kondo', 'title': 'Senior Director of Corporate Accounting', 'fiscalYear': 2024, 'exercisedValue': 0, 'unexercisedValue': 0}, {'maxAge': 1, 'name': 'Suhasini  Chandramouli', 'title': 'Director of Investor Relations', 'fiscalYear': 2024, 'exercisedValue': 0, 'unexercisedValue': 0}, {'maxAge': 1, 'name': 'Ms. Kristin Huguet Quayle', 'title': 'Vice President of Worldwide Communications', 'fiscalYear': 2024, 'exercisedValue': 0, 'unexercisedValue': 0}, {'maxAge': 1, 'name': 'Mr. Greg  Joswiak', 'title': 'Senior Vice President of Worldwide Marketing', 'fiscalYear': 2024, 'exercisedValue': 0, 'unexercisedValue': 0}], 'auditRisk': 7, 'boardRisk': 1, 'compensationRisk': 3, 'shareHolderRightsRisk': 1, 'overallRisk': 1, 'governanceEpochDate': 1756684800, 'compensationAsOfEpochDate': 1735603200, 'irWebsite': 'http://investor.apple.com/', 'executiveTeam': [], 'maxAge': 86400, 'priceHint': 2, 'previousClose': 237.88, 'open': 241.175, 'dayLow': 240.2106, 'dayHigh': 246.27, 'regularMarketPreviousClose': 237.88, 'regularMarketOpen': 241.175, 'regularMarketDayLow': 240.2106, 'regularMarketDayHigh': 246.3, 'dividendRate': 1.04, 'dividendYield': 0.42, 'exDividendDate': 1754870400, 'payoutRatio': 0.1533, 'fiveYearAvgDividendYield': 0.54, 'beta': 1.109, 'trailingPE': 37.31003, 'forwardPE': 29.542719, 'volume': 162456387, 'regularMarketVolume': 162456387, 'averageVolume': 56212347, 'averageVolume10days': 66513550, 'averageDailyVolume10Day': 66513550, 'bid': 240.0, 'ask': 258.21, 'bidSize': 1, 'askSize': 1, 'marketCap': 3643315585024, 'fiftyTwoWeekLow': 169.21, 'fiftyTwoWeekHigh': 260.1, 'priceToSalesTrailing12Months': 8.916038, 'fiftyDayAverage': 223.929, 'twoHundredDayAverage': 221.6535, 'trailingAnnualDividendRate': 1.01, 'trailingAnnualDividendYield': 0.004245838, 'currency': 'USD', 'tradeable': False, 'enterpriseValue': 3689641672704, 'profitMargins': 0.24295999, 'floatShares': 14814419318, 'sharesOutstanding': 14840390000, 'sharesShort': 113582365, 'sharesShortPriorMonth': 104634941, 'sharesShortPreviousMonthDate': 1753920000, 'dateShortInterest': 1756425600, 'sharesPercentSharesOut': 0.0077, 'heldPercentInsiders': 0.0197, 'heldPercentInstitutions': 0.63643, 'shortRatio': 1.95, 'shortPercentOfFloat': 0.0077, 'impliedSharesOutstanding': 15318899712, 'bookValue': 4.431, 'priceToBook': 55.405098, 'lastFiscalYearEnd': 1727481600, 'nextFiscalYearEnd': 1759017600, 'mostRecentQuarter': 1751068800, 'earningsQuarterlyGrowth': 0.093, 'netIncomeToCommon': 99280003072, 'trailingEps': 6.58, 'forwardEps': 8.31, 'lastSplitFactor': '4:1', 'lastSplitDate': 1598832000, 'enterpriseToRevenue': 9.029, 'enterpriseToEbitda': 26.039, '52WeekChange': 0.08402884, 'SandP52WeekChange': 0.1653893, 'lastDividendValue': 0.26, 'lastDividendDate': 1754870400, 'quoteType': 'EQUITY', 'currentPrice': 245.5, 'targetHighPrice': 300.0, 'targetLowPrice': 175.0, 'targetMeanPrice': 241.31557, 'targetMedianPrice': 243.0, 'recommendationMean': 2.02128, 'recommendationKey': 'buy', 'numberOfAnalystOpinions': 40, 'totalCash': 55372001280, 'totalCashPerShare': 3.731, 'ebitda': 141696008192, 'totalDebt': 101698002944, 'quickRatio': 0.724, 'currentRatio': 0.868, 'totalRevenue': 408624988160, 'debtToEquity': 154.486, 'revenuePerShare': 27.173, 'returnOnAssets': 0.24545999, 'returnOnEquity': 1.49814, 'grossProfits': 190739005440, 'freeCashflow': 94873747456, 'operatingCashflow': 108564996096, 'earningsGrowth': 0.121, 'revenueGrowth': 0.096, 'grossMargins': 0.46678, 'ebitdaMargins': 0.34675997, 'operatingMargins': 0.29990998, 'financialCurrency': 'USD', 'symbol': 'AAPL', 'language': 'en-US', 'region': 'US', 'typeDisp': 'Equity', 'quoteSourceName': 'Delayed Quote', 'triggerable': True, 'customPriceAlertConfidence': 'HIGH', 'fullExchangeName': 'NasdaqGS', 'averageDailyVolume3Month': 56212347, 'fiftyTwoWeekLowChange': 76.28999, 'fiftyTwoWeekLowChangePercent': 0.4508598, 'fiftyTwoWeekRange': '169.21 - 260.1', 'fiftyTwoWeekHighChange': -14.600006, 'fiftyTwoWeekHighChangePercent': -0.05613228, 'fiftyTwoWeekChangePercent': 8.402884, 'dividendDate': 1755129600, 'earningsTimestamp': 1753992000, 'earningsTimestampStart': 1761854400, 'earningsTimestampEnd': 1761854400, 'earningsCallTimestampStart': 1753995600, 'earningsCallTimestampEnd': 1753995600, 'isEarningsDateEstimate': True, 'epsTrailingTwelveMonths': 6.58, 'epsForward': 8.31, 'epsCurrentYear': 7.38448, 'priceEpsCurrentYear': 33.2454, 'fiftyDayAverageChange': 21.571, 'fiftyDayAverageChangePercent': 0.09632964, 'twoHundredDayAverageChange': 23.846497, 'twoHundredDayAverageChangePercent': 0.107584566, 'sourceInterval': 15, 'exchangeDataDelayedBy': 0, 'averageAnalystRating': '2.0 - Buy', 'cryptoTradeable': False, 'corporateActions': [], 'postMarketTime': 1758326399, 'regularMarketTime': 1758312002, 'exchange': 'NMS', 'messageBoardId': 'finmb_24937', 'exchangeTimezoneName': 'America/New_York', 'exchangeTimezoneShortName': 'EDT', 'gmtOffSetMilliseconds': -14400000, 'market': 'us_market', 'esgPopulated': False, 'regularMarketChangePercent': 3.20329, 'regularMarketPrice': 245.5, 'shortName': 'Apple Inc.', 'longName': 'Apple Inc.', 'marketState': 'CLOSED', 'postMarketChangePercent': 0.07739407, 'postMarketPrice': 245.69, 'postMarketChange': 0.19000244, 'regularMarketChange': 7.62, 'regularMarketDayRange': '240.2106 - 246.3', 'hasPrePostMarketData': True, 'firstTradeDateMilliseconds': 345479400000, 'displayName': 'Apple', 'trailingPegRatio': 2.3591}
+-- Before model call hook executed.
+CallbackContext: {'history': '\nUser: what is the price of aapl\nAgent: The current price of AAPL is 245.5 USD.', 'session_id': 'session_1758408340073', 'user_id': 'user1', 'app_name': 'stock_analysis_app', 'seq': 25}, 
+LLM_Request: model='gemini-2.5-flash' contents=[Content(
+  parts=[
+    Part(
+      text='AAPL high and low'
+    ),
+  ],
+  role='user'
+), Content(
+  parts=[
+    Part(
+      function_call=FunctionCall(
+        args={
+          'ticker': 'AAPL'
+        },
+        name='extract_stock_info'
+      ),
+      thought_signature=b'\n\xb9\x02\x01\xd1\xed\x8ao`\xd5"\x18&\xb2\xf7\x10\xd7B\xf4py|V`a\x98xyj\xc5\x87\xca\xbd\xbaVP\x88K%\xf6\x8cl0E^\xb2J\x0e0W\xa6\xd4R\xc0+3\xf8\xb0\xfe1rB\xd9\x89]n\xf3\x93\x99\xaa\xa1\r\xfe\x1e@\xc8\xd8*\\\x0f\xe0\x8486\xd3\xdb\xefx\xaa\x03J\xe3\xeeA\x07&,...'
+    ),
+  ],
+  role='model'
+), Content(
+  parts=[
+    Part(
+      function_response=FunctionResponse(
+        name='extract_stock_info',
+        response=<dict len=180>
+      )
+    ),
+  ],
+  role='user'
+)] config=GenerateContentConfig(
+  system_instruction="""you can gather information about stocks using yfinance api, 
+you can reflect upon the result and provide comprehensive details using data. Previous agent output: 
+User: what is the price of aapl
+Agent: The current price of AAPL is 245.5 USD.
+
+You are an agent. Your internal name is "info_gather_agent".
+
+ The description about you is "analyse provided ticker symbol"""",
+  tools=[
+    Tool(
+      function_declarations=[
+        FunctionDeclaration(
+          description="""
+Extract stock information for a given ticker symbol.
+ticker - string ticker symbol for the stock
+""",
+          name='extract_stock_info',
+          parameters=Schema(
+            properties={
+              <... Max depth ...>: <... Max depth ...>
+            },
+            required=[
+              <... Max depth ...>,
+            ],
+            type=<Type.OBJECT: 'OBJECT'>
+          )
+        ),
+      ]
+    ),
+  ]
+) live_connect_config=LiveConnectConfig() tools_dict={'extract_stock_info': <google.adk.tools.function_tool.FunctionTool object at 0x000001D5637C7100>}
+-- After model call hook executed.
+CallbackContext: {'history': '\nUser: what is the price of aapl\nAgent: The current price of AAPL is 245.5 USD.', 'session_id': 'session_1758408340073', 'user_id': 'user1', 'app_name': 'stock_analysis_app', 'seq': 26}, 
+LLM_Response: content=Content(
+  parts=[
+    Part(
+      text="""The daily high for AAPL was 246.27 USD and the daily low was 240.21 USD.
+The 52-week high for AAPL was 260.1 USD and the 52-week low was 169.21 USD.""",
+      thought_signature=b"\n\xa1\x03\x01\xd1\xed\x8aoz\xc6\x88\xc6Y\x19\x08\x8f\xcd\x85-\x94\x05\x18\xb4\xdc\x19\xc4\xff\xdd#MTV.\x8c\xcd\xff\xa4l\x1e\x95\x1fM\x9ce\xcd\x93\x0e\xeb\xb1\x05+\x9cd\xd9\x88_\xdf|\x0b\x19;\xd3\x1b'HG\x19\x02\xaf\xa1\xcc\xb1\x1au\xeb&\xacDR\rvn{\xaa!>\xe3\x1e\xabCS\xe2%\xf9\xe0\xbc\x89...'
+    ),
+  ],
+  role='model'
+) grounding_metadata=None partial=None turn_complete=None finish_reason=<FinishReason.STOP: 'STOP'> error_code=None error_message=None interrupted=None custom_metadata=None usage_metadata=GenerateContentResponseUsageMetadata(
+  candidates_token_count=66,
+  prompt_token_count=3529,
+  prompt_tokens_details=[
+    ModalityTokenCount(
+      modality=<MediaModality.TEXT: 'TEXT'>,
+      token_count=3529
+    ),
+  ],
+  thoughts_token_count=144,
+  total_token_count=3739
+) live_session_resumption_update=None input_transcription=None output_transcription=None
+-- After agent call hook executed.
+CallbackContext: {'history': '\nUser: what is the price of aapl\nAgent: The current price of AAPL is 245.5 USD.', 'session_id': 'session_1758408340073', 'user_id': 'user1', 'app_name': 'stock_analysis_app', 'seq': 27, 'result': 'The daily high for AAPL was 246.27 USD and the daily low was 240.21 USD.\nThe 52-week high for AAPL was 260.1 USD and the 52-week low was 169.21 USD.'}
