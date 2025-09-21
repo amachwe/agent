@@ -74,7 +74,12 @@ def callback_after_tool_call(tool: BaseTool, args: Dict[str, Any], tool_context:
 def callback_before_agent_call(callback_context: CallbackContext)-> Optional[types.Content]:
     info_gather_logger.info("-- Before agent call hook executed.")
     info_gather_logger.info(f"CallbackContext: {callback_context.state.to_dict()}")
-    memory.record_session(app_name=callback_context.state.get("app_name","default_app",),
+    calling_agent = callback_context.state.get("caller_agent", "")
+    info_gather_logger.info(f"Calling Agent: {calling_agent}")
+
+    if calling_agent == "":
+
+        memory.record_session(app_name=callback_context.state.get("app_name","default_app",),
                           user_id=callback_context.state.get("user_id","default_user"),
                           session_id=callback_context.state.get("session_id","default_session"),
                           seq= callback_context.state.get("seq",0),
@@ -82,6 +87,18 @@ def callback_before_agent_call(callback_context: CallbackContext)-> Optional[typ
                           source=f"{NAME}_before_agent_call",
                           interaction_start=True,
                           user_content=callback_context.user_content.parts[0].text if callback_context.user_content and callback_context.user_content.parts else "")
+    else:
+        memory.record_session(app_name=callback_context.state.get("app_name","default_app",),
+                          user_id=callback_context.state.get("user_id","default_user"),
+                          session_id=callback_context.state.get("session_id","default_session"),
+                          seq= callback_context.state.get("seq",0),
+                          state=callback_context.state.get("history",""),
+                          source=f"{NAME}_before_agent_call",
+                          interaction_start=True,
+                          calling_agent=calling_agent,
+                          agent_content=callback_context.user_content.parts[0].text if callback_context.user_content and callback_context.user_content.parts else "")
+
+    
     update_sequence(callback_context.state)
 
 def callback_after_agent_call(callback_context: CallbackContext)-> Optional[types.Content]:

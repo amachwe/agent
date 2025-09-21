@@ -29,11 +29,14 @@ def  update_sequence(state:dict)-> int:
 def callback_before_tool_call(tool: BaseTool, args: Dict[str, Any], tool_context: ToolContext)-> Optional[types.Content]:
     root_logger.info("---- Before tool call hook executed.")
     root_logger.info(f"Tool: {tool.name}, \nArgs: {args}, \nToolContext: {tool_context.state}")
+    tool_context.state["caller_agent"] = NAME
+
     memory.record_session(app_name=tool_context.state.get("app_name","default_app",),
                           user_id=tool_context.state.get("user_id","default_user"),
                           session_id=tool_context.state.get("session_id","default_session"),
                           seq= tool_context.state.get("seq",0),
                           state=tool_context.state.get("history",""),
+                          caller_agent=tool_context.state.get("caller_agent",""),
                           source=f"{NAME}_before_tool_call")
     update_sequence(tool_context.state)
     
@@ -54,6 +57,7 @@ def callback_after_tool_call(tool: BaseTool, args: Dict[str, Any], tool_context:
 def callback_before_agent_call(callback_context: CallbackContext)-> Optional[types.Content]:
     root_logger.info("-- Before agent call hook executed.")
     root_logger.info(f"CallbackContext: {callback_context.invocation_id, callback_context.state.to_dict(), callback_context.user_content}")
+    root_logger.info(f"User text: {callback_context.user_content.parts[0].text if callback_context.user_content and callback_context.user_content.parts else ""}")
     memory.record_session(app_name=callback_context.state.get("app_name","default_app",),
                           user_id=callback_context.state.get("user_id","default_user"),
                           session_id=callback_context.state.get("session_id","default_session"),

@@ -84,3 +84,14 @@ Received request with query: are we talking about IBM?, session_id: session_1758
 Received request with query: what is the price of aapl, session_id: session_1758408340073, user_id: user1
 Received request with query: what is the difference between high and low, session_id: session_1758408340073, user_id: user1
 Received request with query: are we talking about IBM?, session_id: session_1758408340073, user_id: user1
+Received request with query: price of aapl, session_id: session_1758480289685, user_id: user1
+Received request with query: what is the price of aapl, session_id: session_1758480309700, user_id: user1
+Received request with query: what is the price of aapl, session_id: session_1758480329938, user_id: user1
+Received request with query: what is the diff between high and low, session_id: session_1758480329938, user_id: user1
+Received request with query: were we talking about ibm?, session_id: session_1758480329938, user_id: user1
+Received request with query: what is the price of aapl, session_id: session_1758481057836, user_id: user1
+Received request with query: what is the diff between high and low, session_id: session_1758481057836, user_id: user1
+Received request with query: were we talking about ibm?, session_id: session_1758481057836, user_id: user1
+Received request with query: what is the price of aapl, session_id: session_1758481650757, user_id: user1
+Received request with query: what is the difference between the high and low, session_id: session_1758481650757, user_id: user1
+Received request with query: were we talking about ibm, session_id: session_1758481650757, user_id: user1
