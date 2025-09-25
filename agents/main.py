@@ -19,7 +19,7 @@ logger.setLevel(logging.INFO)
 
 #DB_URL = "sqlite:///./agent.db"
 HISTORY = "history"
-APP_NAME = "stock_analysis_app"
+APP_NAME = "stock_agents_app"
 session_service = InMemorySessionService() #DatabaseSessionService(db_url=DB_URL)
 session_state_store = {}
 
@@ -50,12 +50,12 @@ async def call_agent(runner: Runner, current_session: Session, agent: LlmAgent, 
     logger.debug("-------------------------------------------------------")
     current_state = current_session.state.get(agent.output_key, "No result found")
 
-    seq = current_session.state.get("seq", 0)
-    print(seq)
+
+
     history = session_state_store.get((user_id, session_id),{}).get(HISTORY, "")
     history += f"\nUser: {query_json}\nAgent: {current_state}"
 
-    session_state_store[(user_id, session_id)] = {HISTORY: history, "session_id": session_id, "user_id": user_id, "app_name": app_name, "seq": seq}
+    session_state_store[(user_id, session_id)] = {HISTORY: history, "session_id": session_id, "user_id": user_id, "app_name": app_name}
     
     return final_response
 
@@ -80,7 +80,7 @@ def agent_endpoint():
     user_id = data.get('user_id', 'test_user')
 
     if not session_state_store.get((user_id, session_id), None):
-        session_state_store[(user_id, session_id)] = {"session_id": session_id, "user_id": user_id, "app_name": APP_NAME, "seq": session_state_store.get((user_id, session_id), {}).get("seq", 0)}
+        session_state_store[(user_id, session_id)] = {"session_id": session_id, "user_id": user_id, "app_name": APP_NAME}
         logger.debug(f"Initialized state for user_id: {user_id}, session_id: {session_id}, app_name: {APP_NAME}, state: {session_state_store[(user_id, session_id)]}")
 
     logger.info(f"Received request with query: {query_json}, session_id: {session_id}, user_id: {user_id}")
@@ -95,12 +95,12 @@ def agent_endpoint():
     
 
 if __name__ == "__main__":
-    #Purge all memory on restart for clean testing.
-    memory.purge_all_memory(APP_NAME)
+    # #Purge all memory on restart for clean testing.
+    # memory.purge_all_memory(APP_NAME)
     print("Test Mode: Starting Agent Server... all memory purged.")
     
     
-    app.run(debug=True)
+    app.run(debug=False)
 
     
     
