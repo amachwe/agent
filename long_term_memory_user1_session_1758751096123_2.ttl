@@ -1,0 +1,43 @@
+```rdf
+@prefix : <http://example.org/> .
+@prefix schema: <http://schema.org/> .
+
+:IBM a schema:Organization ;
+    schema:name "International Business Machines Corporation" ;
+    schema:tickerSymbol "IBM" ;
+    schema:sector "Technology" ;
+    schema:industry "Information Technology Services" ;
+    schema:url "https://www.ibm.com" ;
+    schema:description "IBM, along with its subsidiaries, provides integrated solutions and services across the Americas, Europe, the Middle East, Africa, and the Asia Pacific." .
+
+:IBM schema:hasCEO :ArvindKrishna .
+:IBM schema:hasExecutiveViceChairman :GaryCohn .
+:IBM schema:hasCFO :JamesKavanaugh .
+:IBM schema:hasChiefLegalOfficer :AnneRobinson .
+:IBM schema:hasSeniorVPOfSoftwareAndChiefCommercialOfficer :RobertThomas .
+
+:ArvindKrishna a schema:Person ;
+    schema:name "Arvind Krishna" ;
+    schema:jobTitle "CEO, President & Chairman" ;
+    schema:worksFor :IBM .
+
+:GaryCohn a schema:Person ;
+    schema:name "Gary D. Cohn" ;
+    schema:jobTitle "Executive Vice Chairman" ;
+    schema:worksFor :IBM .
+
+:JamesKavanaugh a schema:Person ;
+    schema:name "James J. Kavanaugh" ;
+    schema:jobTitle "CFO and Senior VP of Finance & Operations" ;
+    schema:worksFor :IBM .
+
+:AnneRobinson a schema:Person ;
+    schema:name "Anne E. Robinson" ;
+    schema:jobTitle "Senior VP & Chief Legal Officer" ;
+    schema:worksFor :IBM .
+
+:RobertThomas a schema:Person ;
+    schema:name "Robert D. Thomas" ;
+    schema:jobTitle "Senior VP of Software & Chief Commercial Officer" ;
+    schema:worksFor :IBM .
+```

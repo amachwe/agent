@@ -1,0 +1,16 @@
+```turtle
+@prefix : <http://example.org/> .
+@prefix schema: <http://schema.org/> .
+
+:AAPL a schema:Stock ;
+    schema:tickerSymbol "AAPL" ;
+    schema:currentPrice "252.31" ;
+    schema:priceHigh "255.73" ;
+    schema:priceLow "251.04" ;
+    :priceDifference "4.69" .
+
+:priceDifference a rdf:Property;
+    rdfs:domain schema:Stock;
+    rdfs:range xsd:float;
+    rdfs:label "priceDifference".
+```

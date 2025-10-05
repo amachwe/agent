@@ -9,6 +9,14 @@ import agent
 import logging
 import memory
 from flask_cors import CORS
+#DB_URL = "sqlite:///./agent.db"
+HISTORY = "history"
+APP_NAME = "stock_agents_app"
+session_service = InMemorySessionService() #DatabaseSessionService(db_url=DB_URL)
+session_state_store = {}
+
+app = flask.Flask(APP_NAME)
+CORS(app)
 
 #use debug to get detailed tracing.
 log_fh = logging.FileHandler('app.log')
@@ -17,11 +25,7 @@ logger.addHandler(log_fh)
 logger.setLevel(logging.INFO)
 
 
-#DB_URL = "sqlite:///./agent.db"
-HISTORY = "history"
-APP_NAME = "stock_agents_app"
-session_service = InMemorySessionService() #DatabaseSessionService(db_url=DB_URL)
-session_state_store = {}
+
 
 
 async def call_agent(runner: Runner, current_session: Session, agent: LlmAgent, session_id:str, user_id:str, app_name:str,query_json:str):
@@ -68,8 +72,7 @@ async def main(app_name:str, session_id:str, user_id:str, query_json:str):
     #Call the agent with the current session and return response (before - after agent callbacks used).
     await call_agent(runner, current_session, agent.root_agent, session_id, user_id, app_name, query_json)
 
-app = flask.Flask(APP_NAME)
-CORS(app)
+
 
 @app.route('/agent_endpoint', methods=['POST'])
 def agent_endpoint():
