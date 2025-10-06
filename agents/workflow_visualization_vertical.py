@@ -2,6 +2,8 @@ import memory
 import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
 
+# Vibe coded... use with care!
+
 def get_data(record, keys:list):
     return [record.get(key, None) for key in keys]
 
@@ -28,6 +30,7 @@ def visualize_workflow_vertical(app, username, session_id):
         if agent_response:
             events.append((timestamp, 'Agent', agent_response, label_to_show))
     events.sort(key=lambda x: x[0])
+    # Vibe coded... use with care!
 
     # Add more vertical space between events
     vertical_gap = 1.2
