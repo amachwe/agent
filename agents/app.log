@@ -132,3 +132,32 @@ Received request with query: my favourite colour is blue - which stock logo matc
 Received request with query: ok find info about IBM, session_id: session_1758751096123, user_id: user1
 Received request with query: Who are the c-suite for IBM, session_id: session_1758751096123, user_id: user1
 Received request with query: I live in the US - which city is the HQ of IBM, session_id: session_1758751096123, user_id: user1
+Received request with query: what is the opening price of IBM, session_id: session_1759699098061, user_id: user1
+Received request with query: what is the opening price of IBM, session_id: session_1759699122512, user_id: user1
+Received request with query: what is the difference between the opening and closing price of IBM, session_id: session_1759699122512, user_id: user1
+Received request with query: what is the opening price of IBM, session_id: session_1759699185719, user_id: user1
+Received request with query: what is the difference between the opening and closing price of IBM, session_id: session_1759699185719, user_id: user1
+Received request with query: were we talking about AAPL, session_id: session_1759699185719, user_id: user1
+Received request with query: Did I ask about IBM?, session_id: session_1759699185719, user_id: user1
+Received request with query: hi what is the stock price of AAPL, session_id: session_1759699185720, user_id: user1
+Received request with query: did I ask about IBM, session_id: session_1759699185720, user_id: user1
+Received request with query: Did I ask about IBM?, session_id: session_1759699185719, user_id: user1
+Received request with query: what is the stock price of IBM, session_id: session_1760044532665, user_id: user1
+Received request with query: what is the difference between the opening and closing price, session_id: session_1760044532665, user_id: user1
+Received request with query: are we talking about aapl, session_id: session_1760044532665, user_id: user1
+Received request with query: what is the stock price of aapl, session_id: session_1760044532666, user_id: user1
+Received request with query: what is the stock price of msft, session_id: session_1760044532666, user_id: user1
+Received request with query: did we talk about aapl and msft, session_id: session_1760044532666, user_id: user1
+Received request with query: did we talk about aapl and msft, session_id: session_1760044532665, user_id: user1
+Received request with query: what is the price of aapl, session_id: session_1760170748245, user_id: user1
+Received request with query: what is the difference between high and low, session_id: session_1760170748245, user_id: user1
+Received request with query: were we talking about ibm, session_id: session_1760170748245, user_id: user1
+Received request with query: what is the stock price of aapl, session_id: session_1760171615509, user_id: user1
+Received request with query: what is the difference between high and low, session_id: session_1760171615509, user_id: user1
+Received request with query: were we talking about ibm, session_id: session_1760171615509, user_id: user1
+Received request with query: what is the stock price of aapl, session_id: session_1760171804450, user_id: user1
+Received request with query: what is the difference between high and  low, session_id: session_1760171804450, user_id: user1
+Received request with query: are we talking about ibm, session_id: session_1760171804450, user_id: user1
+Received request with query: what is the stock price of ibm, session_id: session_1760172138949, user_id: user1
+Received request with query: what is the difference betrween high and low, session_id: session_1760172138949, user_id: user1
+Received request with query: were we talking about aapl, session_id: session_1760172138949, user_id: user1

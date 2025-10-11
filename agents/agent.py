@@ -32,6 +32,7 @@ def callback_before_tool_call(tool: BaseTool, args: Dict[str, Any], tool_context
                           session_id=tool_context.state.get("session_id","default_session"),
                           state=tool_context.state.get("history",""),
                           caller_agent=tool_context.state.get("caller_agent",""),
+                          tool_name=tool.name,
                           source=f"{NAME}_before_tool_call")
 
     
@@ -44,6 +45,7 @@ def callback_after_tool_call(tool: BaseTool, args: Dict[str, Any], tool_context:
                           user_id=tool_context.state.get("user_id","default_user"),
                           session_id=tool_context.state.get("session_id","default_session"),
                           state=tool_context.state.get("history",""),
+                          tool_name=tool.name,
                           source=f"{NAME}_after_tool_call")
 
     
@@ -99,6 +101,7 @@ agent = LlmAgent(name = NAME,
                  description=("Root agent to coordinate stock analysis"),
                  instruction=prompt,
                  tools=[AgentTool(agent.info_gather_agent)],
+                 #sub_agents=[agent.info_gather_agent],
                  output_key="result",
                  before_tool_callback=callback_before_tool_call,
                  after_tool_callback=callback_after_tool_call,
