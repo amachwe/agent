@@ -21,11 +21,6 @@ MODEL = "gemini-2.5-flash"
 
 prompt = """you can gather information about stocks using yfinance api, 
 you can reflect upon the result and provide comprehensive details using data. Previous agent output: {history?}"""
-def  update_sequence(state:dict)-> int:
-    seq = state.get("seq", 0)
-    seq += 1
-    state["seq"] = seq
-    return seq
 
 def extract_stock_info(ticker: str) -> dict:
     """
@@ -43,11 +38,7 @@ def extract_stock_data(ticker: str, duration_days: int) -> pd.DataFrame:
     """
     stock = yfinance.Ticker(ticker)
     return stock.history(period=f"{duration_days}d")
-def  update_sequence(state:dict)-> int:
-    seq = state.get("seq", 0)
-    seq += 1
-    state["seq"] = seq
-    return seq
+
 
 def callback_before_tool_call(tool: BaseTool, args: Dict[str, Any], tool_context: ToolContext)-> Optional[types.Content]:
     info_gather_logger.info("-- Before tool call hook executed.")
@@ -55,10 +46,9 @@ def callback_before_tool_call(tool: BaseTool, args: Dict[str, Any], tool_context
     memory.record_session(app_name=tool_context.state.get("app_name","default_app",),
                           user_id=tool_context.state.get("user_id","default_user"),
                           session_id=tool_context.state.get("session_id","default_session"),
-                          seq= tool_context.state.get("seq",0),
                           state=tool_context.state.get("history",""),
                           source=f"{NAME}_before_tool_call")
-    update_sequence(tool_context.state)
+   
 
 def callback_after_tool_call(tool: BaseTool, args: Dict[str, Any], tool_context: ToolContext, tool_response: Dict)-> Optional[types.Content]:
     info_gather_logger.info("-- After tool call hook executed.")
@@ -66,23 +56,37 @@ def callback_after_tool_call(tool: BaseTool, args: Dict[str, Any], tool_context:
     memory.record_session(app_name=tool_context.state.get("app_name","default_app",),
                           user_id=tool_context.state.get("user_id","default_user"),
                           session_id=tool_context.state.get("session_id","default_session"),
-                          seq= tool_context.state.get("seq",0),
                           state=tool_context.state.get("history",""),
                           source=f"{NAME}_after_tool_call")
-    update_sequence(tool_context.state)
+
 
 def callback_before_agent_call(callback_context: CallbackContext)-> Optional[types.Content]:
     info_gather_logger.info("-- Before agent call hook executed.")
     info_gather_logger.info(f"CallbackContext: {callback_context.state.to_dict()}")
-    memory.record_session(app_name=callback_context.state.get("app_name","default_app",),
+    calling_agent = callback_context.state.get("caller_agent", "")
+    info_gather_logger.info(f"Calling Agent: {calling_agent}")
+
+    if calling_agent == "":
+
+        memory.record_session(app_name=callback_context.state.get("app_name","default_app",),
                           user_id=callback_context.state.get("user_id","default_user"),
                           session_id=callback_context.state.get("session_id","default_session"),
-                          seq= callback_context.state.get("seq",0),
                           state=callback_context.state.get("history",""),
                           source=f"{NAME}_before_agent_call",
                           interaction_start=True,
                           user_content=callback_context.user_content.parts[0].text if callback_context.user_content and callback_context.user_content.parts else "")
-    update_sequence(callback_context.state)
+    else:
+        memory.record_session(app_name=callback_context.state.get("app_name","default_app",),
+                          user_id=callback_context.state.get("user_id","default_user"),
+                          session_id=callback_context.state.get("session_id","default_session"),
+                          state=callback_context.state.get("history",""),
+                          source=f"{NAME}_before_agent_call",
+                          interaction_start=True,
+                          calling_agent=calling_agent,
+                          agent_content=callback_context.user_content.parts[0].text if callback_context.user_content and callback_context.user_content.parts else "")
+
+    
+
 
 def callback_after_agent_call(callback_context: CallbackContext)-> Optional[types.Content]:
     info_gather_logger.info("-- After agent call hook executed.")
@@ -90,12 +94,11 @@ def callback_after_agent_call(callback_context: CallbackContext)-> Optional[type
     memory.record_session(app_name=callback_context.state.get("app_name","default_app",),
                           user_id=callback_context.state.get("user_id","default_user"),
                           session_id=callback_context.state.get("session_id","default_session"),
-                          seq= callback_context.state.get("seq",0),
                           state=callback_context.state.get("history",""),
                           source=f"{NAME}_after_agent_call",
                           interaction_end=True,
                           agent_response=callback_context.state.get("result",""))
-    update_sequence(callback_context.state) 
+
 
 def callback_before_model_call(callback_context: CallbackContext, llm_request: LlmRequest)-> Optional[types.Content]:
     info_gather_logger.info("-- Before model call hook executed.")
@@ -104,10 +107,9 @@ def callback_before_model_call(callback_context: CallbackContext, llm_request: L
     memory.record_session(app_name=callback_context.state.get("app_name","default_app",),
                           user_id=callback_context.state.get("user_id","default_user"),
                           session_id=callback_context.state.get("session_id","default_session"),
-                          seq= callback_context.state.get("seq",0),
                           state=callback_context.state.get("history",""),
                           source=f"{NAME}_before_model_call")
-    update_sequence(callback_context.state)
+
 
 def callback_after_model_call(callback_context: CallbackContext, llm_response: LlmResponse)-> Optional[types.Content]:
     info_gather_logger.info("-- After model call hook executed.")
@@ -116,10 +118,9 @@ def callback_after_model_call(callback_context: CallbackContext, llm_response: L
     memory.record_session(app_name=callback_context.state.get("app_name","default_app",),
                           user_id=callback_context.state.get("user_id","default_user"), 
                           session_id=callback_context.state.get("session_id","default_session"),
-                          seq= callback_context.state.get("seq",0),
                           state=callback_context.state.get("history",""),
                           source=f"{NAME}_after_model_call")
-    update_sequence(callback_context.state)
+
 
 info_gather_agent = LlmAgent(name = NAME,
                  model=MODEL, 

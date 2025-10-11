@@ -1,0 +1,18 @@
+```rdf
+@prefix : <http://example.org/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:AAPL rdf:type :Stock .
+:AAPL :tickerSymbol "AAPL" .
+:AAPL :currentPrice "252.31"^^xsd:float .
+:AAPL :hasHighPrice "255.73"^^xsd:float .
+:AAPL :hasLowPrice "251.04"^^xsd:float .
+:AAPL :priceDifference "4.69"^^xsd:float .
+:priceDifference a rdf:Property .
+:hasLowPrice a rdf:Property .
+:hasHighPrice a rdf:Property .
+:currentPrice a rdf:Property .
+:tickerSymbol a rdf:Property .
+```

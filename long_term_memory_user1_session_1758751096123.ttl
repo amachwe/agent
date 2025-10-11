@@ -1,0 +1,63 @@
+```turtle
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix schema: <http://schema.org/> .
+@prefix : <http://example.org/> .
+
+:IBM a schema:Organization ;
+    schema:tickerSymbol "IBM" ;
+    schema:name "International Business Machines Corporation" ;
+    schema:sector "Technology" ;
+    schema:industry "Information Technology Services" ;
+    schema:url "https://www.ibm.com" .
+
+:IBM :hasExecutive :ArvindKrishna , :GaryCohn, :JamesKavanaugh, :AnneRobinson, :RobertThomas .
+
+:ArvindKrishna a schema:Person ;
+    schema:name "Arvind Krishna" ;
+    schema:jobTitle "CEO, President & Chairman" ;
+    schema:worksFor :IBM .
+
+:GaryCohn a schema:Person ;
+    schema:name "Gary D. Cohn" ;
+    schema:jobTitle "Executive Vice Chairman" ;
+    schema:worksFor :IBM .
+
+:JamesKavanaugh a schema:Person ;
+    schema:name "James J. Kavanaugh" ;
+    schema:jobTitle "CFO and Senior VP of Finance & Operations" ;
+    schema:worksFor :IBM .
+
+:AnneRobinson a schema:Person ;
+    schema:name "Anne E. Robinson" ;
+    schema:jobTitle "Senior VP & Chief Legal Officer" ;
+    schema:worksFor :IBM .
+
+:RobertThomas a schema:Person ;
+    schema:name "Robert D. Thomas" ;
+    schema:jobTitle "Senior VP of Software & Chief Commercial Officer" ;
+    schema:worksFor :IBM .
+
+:IBM schema:currentPrice "267.53" .
+:IBM schema:previousClose "272.24" .
+:IBM schema:dayRange "267.30 - 273.65" .
+:IBM schema:weekRange "203.51 - 296.16" .
+:IBM schema:marketCap "249.21 billion" .
+:IBM schema:volume "2,455,339" .
+:IBM schema:dividendRate "$6.72" .
+:IBM schema:dividendYield "2.47%" .
+:IBM schema:lastDividendDate "August 5, 2024" .
+:IBM schema:exDividendDate "August 5, 2024" .
+:IBM schema:trailingPE "43.08" .
+:IBM schema:forwardPE "25.21" .
+:IBM schema:pegRatio "1.65" .
+:IBM schema:bookValue "$29.53" .
+:IBM schema:priceToBook "9.06" .
+:IBM schema:earningsPerShare "$6.21" .
+:IBM schema:forwardEPS "$10.61" .
+:IBM schema:revenuePerShare "$69.07" .
+:IBM schema:profitMargins "9.11%" .
+:IBM schema:grossMargins "57.57%" .
+:IBM schema:returnOnEquity "22.67%" .
+:IBM schema:debtToEquity "245.47" .
+```
