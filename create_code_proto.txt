@@ -1,0 +1,1 @@
+python -m grpc_tools.protoc -I../google_apis --python_out=. --pyi_out=.  --grpc_python_out=. a2a.proto

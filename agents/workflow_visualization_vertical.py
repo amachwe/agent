@@ -9,26 +9,36 @@ def get_data(record, keys:list):
 
 def visualize_workflow_vertical(app, username, session_id):
     data = memory.SessionMemory(app_name=app).get_full_session(session_id, username)
-    keys = ["source", "user_content", "agent_response", "timestamp","agent_content", "calling_agent", "tool_name"]
+    keys = ["source", "user_content", "agent_response", "timestamp","agent_content", "calling_agent", "tool_name", "interaction_start", "interaction_end"]
     events = []
     last_label = None
+    prev_role = None
+    pending_human = None
     for record in data:
-        source, user_content, agent_response, timestamp, agent_content, calling_agent, tool_name = get_data(record, keys)
+        source, user_content, agent_response, timestamp, agent_content, calling_agent, tool_name, interaction_start, interaction_end = get_data(record, keys)
         label = source if source else ""
         show_label = False
         if label and label != last_label:
             show_label = True
             last_label = label
         label_to_show = label if show_label else ""
-        if calling_agent:
+        # Queue up human event for start
+        if interaction_start and not calling_agent and user_content:
+            pending_human = (timestamp, 'User', user_content, label_to_show, None)
+        # After agent call: connect response to pending human event
+        if interaction_end and not calling_agent and agent_response:
+            if pending_human:
+                events.append(pending_human)
+                pending_human = None
+            events.append((timestamp, 'Agent', agent_response, label_to_show, None))
+            prev_role = 'Agent'
+        elif calling_agent:
             content = agent_content if agent_content else user_content if user_content else '(no content)'
             events.append((timestamp, 'AgentCaller', content, label_to_show, None))
-        elif user_content:
-            events.append((timestamp, 'User', user_content, label_to_show, None))
+            prev_role = 'AgentCaller'
         if source:
             events.append((timestamp, 'Tool', source, label_to_show, tool_name))
-        if agent_response:
-            events.append((timestamp, 'Agent', agent_response, label_to_show, None))
+            prev_role = 'Tool'
     events.sort(key=lambda x: x[0])
     # Vibe coded... use with care!
 
@@ -61,7 +71,8 @@ def visualize_workflow_vertical(app, username, session_id):
     ax.set_xticklabels(['Agent', 'Tool', 'Agent→Agent', 'Human'])
     ax.set_yticks([])
     ax.set_title(f"Session Sequence: {session_id}")
-    ax.set_ylim(-len(events)*vertical_gap+0.5, 1)
+    # Ensure the last event is always visible (add extra space at the bottom)
+    ax.set_ylim(-len(events)*vertical_gap-0.5, 1.5)
     ax.set_xlim(-0.7, 2.9)
     ax.grid(axis='x', linestyle='--', alpha=0.3)
     legend_handles = [mpatches.Patch(color=color_map[r], label=label_map[r]) for r in x_map]

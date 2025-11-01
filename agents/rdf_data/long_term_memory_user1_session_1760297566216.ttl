@@ -1,0 +1,21 @@
+
+@prefix ex: <http://example.org/ibm#>.
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
+
+ex:IBM a ex:Stock ;
+    ex:currentPrice "277.82"^^xsd:decimal ;
+    ex:dayRange [ ex:low "277.53"^^xsd:decimal ; ex:high "290.385"^^xsd:decimal ] ;
+    ex:previousClose "288.23"^^xsd:decimal ;
+    ex:52WeekRange [ ex:low "203.51"^^xsd:decimal ; ex:high "301.04"^^xsd:decimal ].
+
+ex:DayRangeDifference a ex:FinancialMetric ;
+    ex:stock ex:IBM ;
+    ex:calculatedValue "12.855"^^xsd:decimal.
+
+ex:DayRangeDifference ex:calculatedBy ex:Agent.
+
+ex:Agent a ex:Person.
+
+ex:Agent ex:providesInformation ex:IBM.
+
+ex:Agent ex:providesInformation ex:DayRangeDifference.

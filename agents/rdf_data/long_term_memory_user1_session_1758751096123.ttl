@@ -1,0 +1,33 @@
+
+@prefix : <http://example.org/ibm#>.
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
+
+:ArvindKrishna a :Executive ;
+    :position "CEO, President & Chairman" ;
+    :company :IBM.
+
+:GaryDCohn a :Executive ;
+    :position "Executive Vice Chairman" ;
+    :company :IBM.
+
+:JamesJKavanaugh a :Executive ;
+    :position "CFO and Senior VP of Finance & Operations" ;
+    :company :IBM.
+
+:AnneERobinson a :Executive ;
+    :position "Senior VP & Chief Legal Officer" ;
+    :company :IBM.
+
+:RobertDTomass a :Executive ;
+    :position "Senior VP of Software & Chief Commercial Officer" ;
+    :company :IBM.
+
+:ArvindKrishna :worksFor :IBM.
+
+:GaryDCohn :worksFor :IBM.
+
+:JamesJKavanaugh :worksFor :IBM.
+
+:AnneERobinson :worksFor :IBM.
+
+:RobertDTomass :worksFor :IBM.

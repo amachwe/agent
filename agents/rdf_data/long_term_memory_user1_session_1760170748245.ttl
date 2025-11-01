@@ -1,0 +1,10 @@
+
+@prefix ex: <http://example.org/stock#>.
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
+
+ex:AAPL ex:hasPrice "245.27"^^xsd:decimal.
+ex:AAPL ex:dayHigh "245.38"^^xsd:decimal.
+ex:AAPL ex:dayLow "243.47"^^xsd:decimal.
+ex:dayHigh ex:lessThan ex:dayLow.
+ex:dayHigh ex:hasDifference "11.81"^^xsd:decimal.
+ex:dayLow ex:lessThan ex:dayHigh.

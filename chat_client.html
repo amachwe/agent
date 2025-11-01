@@ -65,7 +65,7 @@
                     body: JSON.stringify({ query: text, user_id: userId, session_id: sessionId })
                 });
                 const data = await response.json();
-                setTimeout(() => appendMessage(data.result, 'agent'), 300); // slight delay for realism
+                setTimeout(() => appendMessage(data.result["final"], 'agent'), 300); // slight delay for realism
             } catch (e) {
                 appendMessage('Error contacting agent backend.', 'agent');
             }

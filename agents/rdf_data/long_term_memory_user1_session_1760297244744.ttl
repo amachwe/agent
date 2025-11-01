@@ -1,0 +1,3 @@
+<http://example.org/IBM> <http://example.org/hasPrice> "277.82 USD".
+<http://example.org/IBM> <http://example.org/isCompany> "IBM".
+<http://example.org/IBM> <http://example.org/hasCurrentPrice> "277.82 USD".

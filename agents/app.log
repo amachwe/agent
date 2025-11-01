@@ -161,3 +161,27 @@ Received request with query: are we talking about ibm, session_id: session_17601
 Received request with query: what is the stock price of ibm, session_id: session_1760172138949, user_id: user1
 Received request with query: what is the difference betrween high and low, session_id: session_1760172138949, user_id: user1
 Received request with query: were we talking about aapl, session_id: session_1760172138949, user_id: user1
+Received request with query: what is the stock price of ib, session_id: session_1760267829517, user_id: user1
+Received request with query: what is the price of ibm, session_id: session_1760268103870, user_id: user1
+Received request with query: what is the stock price of ibm, session_id: session_1760268103870, user_id: user1
+Received request with query: what is the price of ibm, session_id: session_1760289549841, user_id: user1
+Received request with query: what is the price of ibm, session_id: session_1760289549841, user_id: user1
+Received request with query: what is the final price of ibm, session_id: session_1760289992088, user_id: user1
+Received request with query: what is the difference between high and low, session_id: session_1760289992088, user_id: user1
+Received request with query: were we talking about aapl, session_id: session_1760289992088, user_id: user1
+Received request with query: prove that difference is 12.855, session_id: session_1760289992088, user_id: user1
+Received request with query: what is the price of IBM, session_id: session_1760296665528, user_id: user1
+Received request with query: what is the price of ibm, session_id: session_1760296726070, user_id: user1
+Received request with query: what is the price of ibm, session_id: session_1760296778575, user_id: user1
+Received request with query: the difference between high and low, session_id: session_1760296778575, user_id: user1
+Received request with query: were we talking about aapl, session_id: session_1760296778575, user_id: user1
+Received request with query: is the calculation correct? what data did you use, session_id: session_1760296778575, user_id: user1
+Received request with query: is the calculation correct?, session_id: session_1760296778575, user_id: user1
+Received request with query: what is the price of ibm, session_id: session_1760297244744, user_id: user1
+Received request with query: what is the difference in high and low, session_id: session_1760297244744, user_id: user1
+Received request with query: what is price of ibm, session_id: session_1760297566216, user_id: user1
+Received request with query: what is the difference between high and low, session_id: session_1760297566216, user_id: user1
+Received request with query: were we talking about aapl?, session_id: session_1760297566216, user_id: user1
+Received request with query: what is the price of ibm, session_id: session_1760298043431, user_id: user1
+Received request with query: what is the difference between high and low, session_id: session_1760298043431, user_id: user1
+Received request with query: were we talking about aapl?, session_id: session_1760298043431, user_id: user1

@@ -9,6 +9,7 @@ import agent
 import logging
 import memory
 from flask_cors import CORS
+import json 
 #DB_URL = "sqlite:///./agent.db"
 HISTORY = "history"
 APP_NAME = "stock_agents_app"
@@ -52,7 +53,7 @@ async def call_agent(runner: Runner, current_session: Session, agent: LlmAgent, 
     logger.debug("-------------------- Session State --------------------")
     logger.debug(current_session.state)
     logger.debug("-------------------------------------------------------")
-    current_state = current_session.state.get(agent.output_key, "No result found")
+    current_state = final_response
 
 
 
@@ -63,14 +64,15 @@ async def call_agent(runner: Runner, current_session: Session, agent: LlmAgent, 
     
     return final_response
 
-async def main(app_name:str, session_id:str, user_id:str, query_json:str):
+async def main(app_name:str, session_id:str, user_id:str, query_json:str) -> str:
     
     runner = Runner(app_name=app_name, agent=agent.root_agent, session_service=session_service)
     #Create session with initial state from the state store (persists across calls while server is running).
     current_session = await session_service.create_session(app_name=app_name, session_id=session_id, user_id=user_id, state=session_state_store.get((user_id, session_id),{}))
     
     #Call the agent with the current session and return response (before - after agent callbacks used).
-    await call_agent(runner, current_session, agent.root_agent, session_id, user_id, app_name, query_json)
+    final_response =await call_agent(runner, current_session, agent.root_agent, session_id, user_id, app_name, query_json)
+    return final_response
 
 
 
@@ -88,13 +90,10 @@ def agent_endpoint():
 
     logger.info(f"Received request with query: {query_json}, session_id: {session_id}, user_id: {user_id}")
    
-    asyncio.run(main(APP_NAME, session_id, user_id, query_json))
-    
-    current_session = asyncio.run(session_service.get_session(app_name=APP_NAME, session_id=session_id, user_id=user_id))
-    
-    result =current_session.state.get(agent.root_agent.output_key, "No result found")
-    
-    return flask.jsonify({"result": result})
+    result = asyncio.run(main(APP_NAME, session_id, user_id, query_json))
+    result = result.replace('```json','').replace('```','').strip()
+    print(result)
+    return flask.jsonify({"result": json.loads(result)})
     
 
 if __name__ == "__main__":

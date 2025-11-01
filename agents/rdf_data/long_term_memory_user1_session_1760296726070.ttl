@@ -1,0 +1,39 @@
+
+@prefix : <http://example.org/knowledge_graph#>.
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
+
+:John a :Person ;
+    :hasName "John Doe" ;
+    :hasAge 30.
+
+:Jane a :Person ;
+    :hasName "Jane Smith" ;
+    :hasAge 28.
+
+:John :knows :Jane.
+
+:John :livesIn :NewYork.
+
+:Jane :livesIn :LosAngeles.
+
+:NewYork a :City ;
+    :locatedIn :USA.
+
+:LosAngeles a :City ;
+    :locatedIn :USA.
+
+:USA a :Country ;
+    :hasCapital :Washington.
+
+:Washington a :City ;
+    :locatedIn :USA.
+
+:John :worksAt :TechCorp.
+
+:Jane :worksAt :HealthInc.
+
+:TechCorp a :Company ;
+    :locatedIn :NewYork.
+
+:HealthInc a :Company ;
+    :locatedIn :LosAngeles.
